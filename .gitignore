@@ -1,0 +1,33 @@
+# Secrets
+.env
+
+# Data — PDF berhak cipta, jangan distribute
+data/*.pdf
+*.pdf
+!reports/*.pdf
+evaluation/toc_dump.txt
+
+# ChromaDB index
+chroma_db/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Model cache (opsional, bisa besar)
+# sentence_transformers_cache/
+

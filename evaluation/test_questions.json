@@ -1,0 +1,320 @@
+[
+  {
+    "id": "fact_01",
+    "category": "factual",
+    "question": "Berapa skala skor total untuk tes TOEFL iBT dan berapa rentang skor untuk setiap bagiannya?",
+    "reference_answer": "Skor total TOEFL iBT berkisar antara 0 hingga 120. Setiap bagian (Reading, Listening, Speaking, dan Writing) memiliki rentang skor 0 hingga 30. Skor total merupakan penjumlahan dari keempat skor bagian tersebut.",
+    "relevant_pages": [
+      35
+    ],
+    "evaluator_notes": "Halaman PDF 35 (buku hal 21) secara eksplisit menyajikan tabel Score Scales: Reading 0-30, Listening 0-30, Speaking 0-30, Writing 0-30, Total Score 0-120."
+  },
+  {
+    "id": "fact_02",
+    "category": "factual",
+    "question": "Berapa jumlah jenis pertanyaan pada Reading section tes TOEFL iBT dan dibagi ke dalam berapa kategori keterampilan?",
+    "reference_answer": "Terdapat 10 jenis pertanyaan pada Reading section yang dibagi ke dalam 3 kategori keterampilan: Basic Information skills, Inferencing skills, dan Reading to Learn skills.",
+    "relevant_pages": [
+      51,
+      52
+    ],
+    "evaluator_notes": "Halaman PDF 51-52 (buku hal 37-38) memuat bagan TOEFL Reading Question Types dengan 10 jenis pertanyaan dalam 3 kategori."
+  },
+  {
+    "id": "fact_03",
+    "category": "factual",
+    "question": "Berapa jumlah materi kuliah (lectures) dan percakapan (conversations) pada Listening section TOEFL iBT?",
+    "reference_answer": "Pada Listening section terdapat 4 hingga 6 materi kuliah (lectures) dan 2 hingga 3 percakapan (conversations). Setiap kuliah diikuti 6 pertanyaan dan setiap percakapan diikuti 5 pertanyaan.",
+    "relevant_pages": [
+      137,
+      138
+    ],
+    "evaluator_notes": "Halaman PDF 137 (buku hal 123) menyatakan 4-6 lectures dan 2-3 conversations dengan 6 pertanyaan per lecture dan 5 per conversation."
+  },
+  {
+    "id": "fact_04",
+    "category": "factual",
+    "question": "Berapa lama waktu persiapan dan waktu berbicara yang diberikan untuk Speaking Question 1 (Independent Speaking)?",
+    "reference_answer": "Untuk Speaking Question 1 (Independent Speaking), peserta diberikan waktu persiapan selama 15 detik dan waktu berbicara/memberikan respons selama 45 detik.",
+    "relevant_pages": [
+      32,
+      180,
+      181
+    ],
+    "evaluator_notes": "Halaman PDF 181 (buku hal 167) dan PDF 32 menyebutkan 15 seconds to prepare dan 45 seconds to respond."
+  },
+  {
+    "id": "fact_05",
+    "category": "factual",
+    "question": "Ada berapa tugas dalam bagian Writing tes TOEFL iBT dan apa saja nama kedua tugas tersebut?",
+    "reference_answer": "Terdapat 2 tugas dalam Writing section: Integrated Writing task dan Independent Writing task.",
+    "relevant_pages": [
+      33,
+      209
+    ],
+    "evaluator_notes": "Halaman PDF 33 dan PDF 209 (buku hal 195) menjelaskan ada dua tugas dalam Writing section."
+  },
+  {
+    "id": "fact_06",
+    "category": "factual",
+    "question": "Berapa jumlah kata yang disarankan untuk respons pada tugas Integrated Writing?",
+    "reference_answer": "Jumlah kata yang disarankan untuk respons yang efektif pada tugas Integrated Writing biasanya sekitar 150 hingga 225 kata.",
+    "relevant_pages": [
+      211,
+      292
+    ],
+    "evaluator_notes": "Halaman PDF 211 dan 292 mencantumkan rekomendasi panjang esai 150 to 225 words."
+  },
+  {
+    "id": "fact_07",
+    "category": "factual",
+    "question": "Berapa skala penilaian mentah (raw rating scale) yang digunakan penilai ETS untuk menilai tugas Speaking?",
+    "reference_answer": "Respons Speaking dinilai oleh penilai bersertifikat menggunakan skala penilaian holistik 0 hingga 4.",
+    "relevant_pages": [
+      35,
+      180,
+      202
+    ],
+    "evaluator_notes": "Halaman PDF 35 dan PDF 202 (Speaking Scoring Rubric) menyatakan rentang nilai mentah 0 sampai 4."
+  },
+  {
+    "id": "fact_08",
+    "category": "factual",
+    "question": "Bagaimana sistem penilaian Writing section TOEFL iBT menurut buku panduan resmi?",
+    "reference_answer": "Respons Writing dikirim ke ETS dan dinilai oleh dua orang penilai bersertifikat serta sistem penilaian otomatis (automated scoring system / e-rater) dengan skala 0 hingga 5.",
+    "relevant_pages": [
+      36,
+      214,
+      223
+    ],
+    "evaluator_notes": "Halaman PDF 36 menyebutkan penilaian oleh two certified raters dan automated scoring system skala 0 sampai 5."
+  },
+  {
+    "id": "fact_09",
+    "category": "factual",
+    "question": "Berapa kategori utama pertanyaan pada Listening section dan apa saja nama ketiga kategori tersebut?",
+    "reference_answer": "Terdapat 3 kategori utama pertanyaan pada Listening section: Basic Comprehension questions, Pragmatic Understanding questions, dan Connecting Information questions.",
+    "relevant_pages": [
+      140
+    ],
+    "evaluator_notes": "Halaman PDF 140 (buku hal 126) menampilkan bagan 3 kategori pertanyaan Listening."
+  },
+  {
+    "id": "fact_10",
+    "category": "factual",
+    "question": "Apa dua jenis pertanyaan Reading to Learn yang ada pada Reading section TOEFL iBT?",
+    "reference_answer": "Dua jenis pertanyaan Reading to Learn adalah Prose Summary dan Fill in a Table.",
+    "relevant_pages": [
+      52
+    ],
+    "evaluator_notes": "Halaman PDF 52 (buku hal 38) mencantumkan kategori Reading to Learn questions: Prose Summary dan Fill in a Table."
+  },
+  {
+    "id": "concept_01",
+    "category": "conceptual",
+    "question": "Apa perbedaan mendasar antara pertanyaan Factual Information dan Negative Factual Information pada Reading section?",
+    "reference_answer": "Factual Information questions meminta peserta mengidentifikasi fakta yang secara eksplisit dinyatakan dalam teks. Sebaliknya, Negative Factual Information questions (ditandai dengan kata NOT atau EXCEPT dengan huruf kapital) meminta peserta memverifikasi informasi mana yang TIDAK benar atau TIDAK disebutkan dalam teks, di mana tiga pilihan lainnya benar menurut teks.",
+    "relevant_pages": [
+      52,
+      53,
+      54
+    ],
+    "evaluator_notes": "Sintesis dari perbandingan tipe 1 dan tipe 2 pada halaman PDF 52-54."
+  },
+  {
+    "id": "concept_02",
+    "category": "conceptual",
+    "question": "Apa perbedaan utama antara tugas Independent Speaking dan Integrated Speaking pada TOEFL iBT?",
+    "reference_answer": "Independent Speaking (Questions 1 dan 2) meminta peserta berbicara berdasarkan pengalaman dan pendapat pribadi tanpa materi bacaan atau dengaran. Sedangkan Integrated Speaking (Questions 3 sampai 6) mengintegrasikan keterampilan: peserta harus membaca teks pendek dan/atau mendengarkan percakapan/kuliah, lalu menyampaikan respons lisan yang merangkum atau mensintesis materi tersebut.",
+    "relevant_pages": [
+      31,
+      180,
+      181,
+      182
+    ],
+    "evaluator_notes": "Sintesis konsep Independent vs Integrated Speaking dari bab 1 dan bab 4."
+  },
+  {
+    "id": "concept_03",
+    "category": "conceptual",
+    "question": "Apa tiga kriteria utama yang didengarkan oleh penilai (raters) saat mengevaluasi respons Speaking?",
+    "reference_answer": "Tiga kriteria utama adalah: (1) Delivery (kejelasan ucapan, kelancaran, artikulasi, pengucapan, dan intonasi alami); (2) Language Use (keefektifan penggunaan tata bahasa dan kosakata); dan (3) Topic Development (kelengkapan jawaban terhadap pertanyaan, kejelasan hubungan antar gagasan, dan koherensi).",
+    "relevant_pages": [
+      180,
+      202
+    ],
+    "evaluator_notes": "Halaman PDF 180 dan PDF 202 merinci Delivery, Language Use, dan Topic Development."
+  },
+  {
+    "id": "concept_04",
+    "category": "conceptual",
+    "question": "Mengapa menghafal respons sebelum tes (memorized responses) dilarang dan dapat merugikan skor pada Speaking section?",
+    "reference_answer": "Buku panduan ETS memperingatkan agar peserta tidak menghafal respons dari internet atau bimbingan tes. Penilai terlatih dapat dengan mudah mengenali respons hafalan dari ritme, intonasi, dan konten yang berbeda jauh dari respons spontan, dan hal tersebut akan menurunkan skor peserta.",
+    "relevant_pages": [
+      182
+    ],
+    "evaluator_notes": "Halaman PDF 182 dalam kotak Tip memperingatkan tentang efek negatif respons hafalan."
+  },
+  {
+    "id": "concept_05",
+    "category": "conceptual",
+    "question": "Bagaimana perbedaan alur kerja antara tugas Integrated Writing dan Independent Writing?",
+    "reference_answer": "Pada Integrated Writing, peserta membaca teks akademik pendek (3 menit), mendengarkan ceramah yang membahas topik yang sama (biasanya menentang atau melengkapi teks), lalu menulis esai yang merangkum poin ceramah dan hubungannya dengan teks bacaan. Pada Independent Writing, peserta diberikan sebuah topik/pernyataan dan diminta menulis esai argumentatif berdasarkan pengetahuan dan pengalaman pribadi dalam waktu 30 menit.",
+    "relevant_pages": [
+      33,
+      209,
+      210,
+      220
+    ],
+    "evaluator_notes": "Sintesis prosedur kedua task Writing dari bab 5."
+  },
+  {
+    "id": "concept_06",
+    "category": "conceptual",
+    "question": "Apa ciri-ciri respons yang mendapatkan skor tertinggi (Skor 5) pada rubrik Independent Writing?",
+    "reference_answer": "Respons dengan Skor 5 mampu menjawab tugas dan topik secara efektif, terorganisasi dan berkembang dengan baik melalui penjelasan, contoh, dan detail yang relevan, menunjukkan kesatuan (unity), progresi ide, koherensi, serta kefasihan bahasa dengan penggunaan struktur kalimat dan variasi kata yang tepat walau terdapat kesalahan leksikal/tata bahasa minor.",
+    "relevant_pages": [
+      223
+    ],
+    "evaluator_notes": "Rubrik skor 5 Independent Writing pada halaman PDF 223."
+  },
+  {
+    "id": "concept_07",
+    "category": "conceptual",
+    "question": "Apa perbedaan konteks komunikasi antara Service Encounters dan Academic Lectures pada Listening section?",
+    "reference_answer": "Service encounters adalah percakapan di lingkungan kampus dengan konten non-akademik (seperti menanyakan pembayaran asrama atau registrasi kelas), sedangkan Academic lectures mencerminkan bahasa pengajaran profesor di ruang kelas dengan materi akademik tingkat pengantar (introductory level).",
+    "relevant_pages": [
+      138
+    ],
+    "evaluator_notes": "Halaman PDF 138 menjelaskan perbedaan Service Encounters dan Lectures."
+  },
+  {
+    "id": "concept_08",
+    "category": "conceptual",
+    "question": "Apa yang diuji oleh pertanyaan Pragmatic Understanding pada Listening section?",
+    "reference_answer": "Pertanyaan Pragmatic Understanding menguji pemahaman peserta terhadap makna implisit atau tujuan pragmatis dari tuturan, bukan hanya makna harfiah. Ini mencakup pemahaman fungsi tuturan (misalnya alasan pembicara mengatakan kalimat tertentu) dan pemahaman sikap atau opini pembicara (attitude/opinion).",
+    "relevant_pages": [
+      140,
+      145
+    ],
+    "evaluator_notes": "Halaman PDF 140 dan 145 menjelaskan kategori Pragmatic Understanding."
+  },
+  {
+    "id": "concept_09",
+    "category": "conceptual",
+    "question": "Apa ketentuan mengenai pembuatan catatan (note-taking) selama tes TOEFL iBT menurut buku resmi?",
+    "reference_answer": "Peserta tes diperbolehkan membuat catatan (take notes) di seluruh bagian tes menggunakan kertas coret-coret (scratch paper) dan pensil yang disediakan oleh pusat tes. Di akhir tes, seluruh catatan dikumpulkan dan dimusnahkan oleh pengawas untuk menjaga keamanan tes.",
+    "relevant_pages": [
+      19,
+      180
+    ],
+    "evaluator_notes": "Halaman PDF 19 dan 180 menegaskan aturan note-taking dan pengumpulan scratch paper."
+  },
+  {
+    "id": "concept_10",
+    "category": "conceptual",
+    "question": "Bagaimana strategi umum yang disarankan untuk menghadapi pertanyaan Prose Summary pada Reading section?",
+    "reference_answer": "Strategi untuk Prose Summary adalah membedakan gagasan utama (major ideas) dari detail pendukung minor atau pernyataan yang salah/kontradiktif. Peserta harus memilih 3 dari 6 pernyataan yang merepresentasikan gagasan pokok bacaan secara keseluruhan, bukan sekadar memilih pernyataan yang benar faktanya tetapi hanya berupa detail kecil.",
+    "relevant_pages": [
+      50,
+      52,
+      58
+    ],
+    "evaluator_notes": "Halaman PDF 50, 52, dan 58 membahas format dan strategi penyelesaian Prose Summary."
+  },
+  {
+    "id": "cite_01",
+    "category": "retrieval_citation",
+    "question": "Berapa menit waktu yang diberikan untuk membaca bacaan pada tugas Integrated Writing sebelum audio diputar?",
+    "reference_answer": "Peserta diberikan waktu 3 menit untuk membaca teks bacaan sebelum materi kuliah audio diputar.",
+    "relevant_pages": [
+      210
+    ],
+    "evaluator_notes": "Halaman PDF 210 secara spesifik menyatakan: You will have 3 minutes to read the passage."
+  },
+  {
+    "id": "cite_02",
+    "category": "retrieval_citation",
+    "question": "Berapa poin maksimal yang bisa diperoleh dari pertanyaan Prose Summary dan Fill-in-a-Table pada Reading section?",
+    "reference_answer": "Pertanyaan Prose Summary bernilai hingga 2 poin (peserta mendapat poin penuh jika memilih 3 jawaban benar, atau 1 poin jika 2 benar). Pertanyaan Fill-in-a-Table bernilai hingga 3 poin atau 4 poin tergantung jumlah opsi tabel.",
+    "relevant_pages": [
+      23
+    ],
+    "evaluator_notes": "Halaman PDF 23 (buku hal 9) menjelaskan bobot poin untuk Reading to Learn questions."
+  },
+  {
+    "id": "cite_03",
+    "category": "retrieval_citation",
+    "question": "Apa saja empat kategori utama topik materi kuliah (lectures) yang biasanya muncul pada Listening section?",
+    "reference_answer": "Empat kategori utama materi kuliah pada Listening section adalah: Arts, Life Science, Physical Science, dan Social Science.",
+    "relevant_pages": [
+      138,
+      139
+    ],
+    "evaluator_notes": "Halaman PDF 138-139 menyajikan daftar empat kategori topik kuliah akademik."
+  },
+  {
+    "id": "cite_04",
+    "category": "retrieval_citation",
+    "question": "Apakah buku Official Guide ini diterbitkan oleh ETS dan apa edisi dari buku tersebut?",
+    "reference_answer": "Buku ini adalah The Official Guide to the TOEFL Test Fourth Edition yang diterbitkan resmi oleh ETS (Educational Testing Service) bersama penerbit McGraw-Hill pada tahun 2012.",
+    "relevant_pages": [
+      1,
+      2,
+      9,
+      13
+    ],
+    "evaluator_notes": "Halaman PDF 1, 9, 13 mencantumkan identitas The Official Guide to the TOEFL Test Fourth Edition ETS."
+  },
+  {
+    "id": "cite_05",
+    "category": "retrieval_citation",
+    "question": "Berapa jumlah kata minimal yang direkomendasikan untuk esai tugas Independent Writing?",
+    "reference_answer": "Panjang esai yang efektif untuk tugas Independent Writing biasanya minimal 300 kata, meskipun tidak ada batas kata maksimum yang kaku.",
+    "relevant_pages": [
+      220,
+      295
+    ],
+    "evaluator_notes": "Halaman PDF 220 dan 295 menyatakan: an effective response will usually contain at least 300 words."
+  },
+  {
+    "id": "oos_01",
+    "category": "out_of_scope",
+    "question": "Berapa biaya pendaftaran resmi tes TOEFL iBT dalam mata uang Rupiah pada tahun 2025 di Jakarta?",
+    "reference_answer": "Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia. Dokumen sumber adalah buku panduan TOEFL ETS edisi 2012 dan tidak mencantumkan biaya pendaftaran lokal dalam Rupiah untuk tahun 2025.",
+    "relevant_pages": [],
+    "evaluator_notes": "Pertanyaan di luar cakupan dokumen. Sistem wajib menyatakan bahwa informasi tidak ditemukan / tidak tersedia."
+  },
+  {
+    "id": "oos_02",
+    "category": "out_of_scope",
+    "question": "Apakah buku ini memberikan informasi tentang tips mengerjakan tes IELTS Academic dan rekomendasi lembaga kursus di Yogyakarta?",
+    "reference_answer": "Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia. Dokumen ini hanya membahas tes TOEFL iBT dari ETS dan tidak mencakup tes IELTS maupun rekomendasi bimbingan belajar lokal.",
+    "relevant_pages": [],
+    "evaluator_notes": "Pertanyaan tentang IELTS dan kursus lokal di luar cakupan dokumen."
+  },
+  {
+    "id": "oos_03",
+    "category": "out_of_scope",
+    "question": "Bagaimana arsitektur kode deep learning PyTorch dari model e-rater yang digunakan ETS untuk menilai esai?",
+    "reference_answer": "Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia. Buku panduan resmi ETS ini hanya menyebutkan adanya automated scoring system (e-rater), namun tidak menyajikan kode sumber teknis atau arsitektur deep learning PyTorch.",
+    "relevant_pages": [],
+    "evaluator_notes": "Pertanyaan teknis implementasi AI internal ETS di luar cakupan buku panduan."
+  },
+  {
+    "id": "oos_04",
+    "category": "out_of_scope",
+    "question": "Apa syarat skor tes PTE Academic untuk mengajukan visa kerja ke Australia?",
+    "reference_answer": "Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia. Dokumen sumber adalah buku panduan TOEFL iBT dan tidak membahas ketentuan visa Australia atau tes PTE Academic.",
+    "relevant_pages": [],
+    "evaluator_notes": "Topik visa Australia dan PTE berada di luar cakupan dokumen."
+  },
+  {
+    "id": "oos_05",
+    "category": "out_of_scope",
+    "question": "Berapa kunci jawaban untuk soal nomor 1 sampai 10 pada ujian SBMPTN/UTBK tahun ini?",
+    "reference_answer": "Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia. Dokumen sumber secara khusus membahas tes TOEFL iBT edisi 2012 dan sama sekali tidak memiliki kaitan dengan ujian UTBK/SBMPTN.",
+    "relevant_pages": [],
+    "evaluator_notes": "Ujian UTBK di luar cakupan dokumen."
+  }
+]
