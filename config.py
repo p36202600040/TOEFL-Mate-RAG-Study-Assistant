@@ -38,9 +38,8 @@ RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "1.5"))
 
 # ── Groq API ─────────────────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
-# Nama model harus sesuai dengan model yang tersedia di Groq pada saat digunakan.
-# Verifikasi di https://console.groq.com/docs/models
+GROQ_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
+# Model diverifikasi langsung terhadap Groq API endpoint yang aktif (qwen/qwen3.8-27b).
 
 GROQ_MAX_TOKENS = int(os.getenv("GROQ_MAX_TOKENS", "2048"))
 GROQ_TEMPERATURE = float(os.getenv("GROQ_TEMPERATURE", "0.2"))

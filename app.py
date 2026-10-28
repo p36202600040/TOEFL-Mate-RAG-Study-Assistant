@@ -5,12 +5,24 @@ Jalankan: streamlit run app.py
 """
 import streamlit as st
 import sys
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Ensure fresh env values on every run
+load_dotenv(override=True)
 
 # Ensure project root is in path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import config
+import importlib
+importlib.reload(config)
+import src.prompts
+importlib.reload(src.prompts)
+import src.generator
+importlib.reload(src.generator)
+
 from src.retriever import get_chroma_client, get_or_create_collection, retrieve
 from src.generator import generate_answer
 
@@ -108,7 +120,8 @@ with col2:
         st.error("❌ API Key belum diatur")
         st.info("Isi `GROQ_API_KEY` di file `.env`")
 with col3:
-    st.info(f"🤖 Model: {config.GROQ_MODEL}")
+    active_display_model = os.getenv("GROQ_MODEL", config.GROQ_MODEL)
+    st.info(f"🤖 Model: {active_display_model}")
 
 st.markdown("---")
 
@@ -185,6 +198,7 @@ if prompt := st.chat_input("Tanyakan tentang TOEFL... (ID/EN)"):
                         language=language,
                         style=style,
                         level=level,
+                        model=os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b").strip(),
                     )
 
                 if result["error"]:

@@ -45,9 +45,15 @@ def generate_answer(
         - contexts_used: list[dict]
         - error: str | None
     """
-    used_model = model or config.GROQ_MODEL
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+    import os
 
-    if not config.GROQ_API_KEY:
+    active_api_key = os.getenv("GROQ_API_KEY", config.GROQ_API_KEY).strip()
+    active_model = model or os.getenv("GROQ_MODEL", "openai/gpt-oss-120b").strip()
+    used_model = active_model
+
+    if not active_api_key:
         return {
             "answer": "",
             "model": used_model,
@@ -57,7 +63,7 @@ def generate_answer(
         }
 
     try:
-        client = get_groq_client()
+        client = Groq(api_key=active_api_key)
     except Exception as e:
         return {
             "answer": "",
