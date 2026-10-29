@@ -108,11 +108,20 @@ def retrieve(
 
     query_embedding = embed_query(query)
 
-    results = collection.query(
-        query_embeddings=[query_embedding],
-        n_results=k,
-        include=["documents", "metadatas", "distances"],
-    )
+    try:
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=k,
+            include=["documents", "metadatas", "distances"],
+        )
+    except Exception:
+        # Fallback jika collection handle sudah stale (misal setelah re-ingestion)
+        collection = get_or_create_collection()
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=k,
+            include=["documents", "metadatas", "distances"],
+        )
 
     retrieved = []
     if results and results["ids"] and results["ids"][0]:

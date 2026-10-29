@@ -36,9 +36,8 @@ st.set_page_config(
 
 
 # ── Helper: check prerequisites ─────────────────────────────────────────
-@st.cache_resource
 def load_collection():
-    """Load ChromaDB collection. Cached across reruns."""
+    """Load ChromaDB collection freshly to prevent stale collection references."""
     try:
         client = get_chroma_client()
         collection = get_or_create_collection(client)
