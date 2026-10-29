@@ -424,3 +424,4 @@ if __name__ == "__main__":
     out = Path(__file__).resolve().parent.parent / "reports" / "presentation_demo_guide.pdf"
     out.parent.mkdir(parents=True, exist_ok=True)
     create_presentation_pdf(out)
+

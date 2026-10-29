@@ -101,6 +101,8 @@ def create_chunks_from_pages(
     pages: list[dict],
     chunk_size: int = 500,
     chunk_overlap: int = 100,
+    start_id: int = 0,
+    id_prefix: str = "chunk",
 ) -> list[dict]:
     """
     Buat chunk dari halaman-halaman PDF dengan metadata.
@@ -113,7 +115,7 @@ def create_chunks_from_pages(
         - page: int
     """
     all_chunks = []
-    chunk_counter = 0
+    chunk_counter = start_id
 
     for page_data in pages:
         cleaned = clean_text(page_data["text"])
@@ -121,7 +123,7 @@ def create_chunks_from_pages(
 
         for chunk_text_item in chunks:
             all_chunks.append({
-                "chunk_id": f"chunk_{chunk_counter:05d}",
+                "chunk_id": f"{id_prefix}_{chunk_counter:05d}",
                 "text": chunk_text_item,
                 "source": page_data["source"],
                 "page": page_data["page"],

@@ -91,8 +91,10 @@ with st.sidebar:
 
     st.markdown("---")
     st.caption(
-        "📖 Sumber: The Official Guide to the TOEFL Test, 4th Ed. (ETS, 2012)\n\n"
-        "⚠️ Edisi 2012 — format TOEFL mungkin telah berubah.\n\n"
+        "📖 **Sumber Dokumen Terdaftar:**\n\n"
+        "1. *The Official Guide to the TOEFL Test, 4th Ed.* (ETS, 2012)\n"
+        "2. *Pre-Test & Modul Pelatihan TOEFL* (CFLT UDINUS)\n\n"
+        "⚠️ Edisi 2012 — format resmi TOEFL mungkin memiliki penyesuaian terkini.\n\n"
         "🤖 Dibuat untuk UTS Pengantar Generative AI"
     )
 
@@ -144,10 +146,11 @@ for i, message in enumerate(st.session_state.messages):
                 with st.expander("📚 Sumber yang digunakan", expanded=False):
                     for src in sources:
                         page = src.get("page", "?")
-                        distance = src.get("distance", "?")
-                        text_preview = src.get("text", "")[:200]
+                        source = src.get("source", "Dokumen")
+                        distance = src.get("distance", 0)
+                        text_preview = src.get("text", "")[:220]
                         st.markdown(
-                            f"**Halaman {page}** (distance: {distance:.4f})\n\n"
+                            f"📖 **{source}** — **Halaman {page}** *(Distance: {distance:.4f})*\n\n"
                             f"> {text_preview}..."
                         )
 
@@ -218,10 +221,11 @@ if prompt := st.chat_input("Tanyakan tentang TOEFL... (ID/EN)"):
                 with st.expander("📚 Sumber yang digunakan", expanded=False):
                     for src in sources_display:
                         page = src.get("page", "?")
+                        source = src.get("source", "Dokumen")
                         distance = src.get("distance", 0)
-                        text_preview = src.get("text", "")[:200]
+                        text_preview = src.get("text", "")[:220]
                         st.markdown(
-                            f"**Halaman {page}** (distance: {distance:.4f})\n\n"
+                            f"📖 **{source}** — **Halaman {page}** *(Distance: {distance:.4f})*\n\n"
                             f"> {text_preview}..."
                         )
 

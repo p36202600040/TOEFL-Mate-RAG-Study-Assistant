@@ -120,3 +120,4 @@ Dokumen ini adalah ringkasan skenario dan poin-poin penting yang harus dijelaska
 - [ ] File `.env` sudah terisi dengan `GROQ_API_KEY` aktif.
 - [ ] Tab kedua browser / PDF viewer sudah membuka [`reports/methodology_evaluation.pdf`](file:///d:/001%20Road%20to%20M%20KOM/SEMESTER%201/Introduction%20to%20Generative%20AI/UTS%20TOEFL%20Mate%20RAG%20Study%20Assistant/reports/methodology_evaluation.pdf).
 - [ ] Audio mikrofon jernih dan resolusi layar diatur minimal 1080p (Full HD).
+

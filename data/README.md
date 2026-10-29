@@ -8,3 +8,4 @@ Setelah PDF diletakkan di folder ini, jalankan perintah ingestion untuk membangu
 python scripts/ingest_pdf.py
 ```
 *(Catatan: File PDF buku berhak cipta tidak disertakan di repositori/ZIP demi mematuhi ketentuan hak cipta ETS).*
+
