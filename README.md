@@ -2,9 +2,7 @@
 
 ## Dokumen utama untuk pengumpulan
 
-- [Laporan metodologi evaluasi dan hasil final UTS](reports/methodology_evaluation_final_uts_20261103.pdf)
-- [Briefing kelompok dan alur presentasi](reports/briefing_presentasi_toefl_mate.pdf)
-- [Panduan GitHub Desktop, VPS aaPanel, dan domain](docs/GITHUB_VPS.md)
+- [Laporan metodologi evaluasi dan hasil final](reports/methodology_evaluation_final_uts_20261103.pdf)
 - [Salinan hasil V2 tersanitasi untuk publikasi](evaluation/public/)
 
 Laporan lain merupakan arsip iterasi. Angka V2 bersifat historis, bukan hasil evaluasi source-aware terbaru atau pengujian deployment. Artefak mentah V2 tetap lokal; salinan publik menghapus pesan error provider tanpa menghitung ulang metrik.
@@ -78,7 +76,8 @@ UTS TOEFL Mate RAG Study Assistant/
 ├── .gitignore                  # Git ignore untuk secrets, database, & PDF
 ├── README.md                   # Dokumentasi instalasi dan penggunaan
 ├── data/                       # Tempat penyimpanan file PDF sumber
-│   └── eBook_TOEFL_Official_Guide_4e.pdf
+│   ├── eBook_TOEFL_Official_Guide_4e.pdf
+│   └── PRE-TEST & MODUL BK CFLT 2026.pdf
 ├── scripts/
 │   ├── ingest_pdf.py           # Ingestion PDF ke ChromaDB
 │   ├── evaluate.py             # Evaluasi otomatis dataset pengujian
@@ -102,8 +101,7 @@ UTS TOEFL Mate RAG Study Assistant/
 │   ├── test_retrieval.py       # Unit test embedding & ChromaDB
 │   └── test_citations.py       # Unit test prompt, sitasi, & metrik
 └── reports/
-    ├── methodology_evaluation.pdf  # Laporan evaluasi metodologi PDF
-    └── demo_outline.md         # Naskah/outline video demonstrasi (<= 5 menit)
+    └── methodology_evaluation.pdf  # Laporan evaluasi metodologi PDF
 ```
 
 ---
@@ -138,8 +136,6 @@ CHUNK_OVERLAP=100
 TOP_K=5
 RELEVANCE_THRESHOLD=1.5
 ```
-
-> **Catatan Keamanan:** Jangan pernah melakukan *commit* atau membagikan file `.env` ke publik. File `.env` sudah dimasukkan ke dalam `.gitignore`.
 
 ### 4. Ingestion PDF ke ChromaDB
 Pastikan PDF sumber berada di dalam folder `data/`. Jalankan skrip ingestion:
@@ -230,10 +226,3 @@ python scripts/build_report.py --results evaluation/results_v2_k5.json --compari
 2. **Hak Cipta:** Konten buku adalah hak cipta Educational Testing Service (ETS) dan McGraw-Hill. Sistem ini hanya menggunakan kutipan kontekstual ringkas untuk tujuan studi akademik (Fair Use) dan **tidak mendistribusikan ulang PDF lengkap**.
 3. **Bukan Pengganti Instruktur:** Sistem berfungsi sebagai alat bantu belajar dan navigasi referensi, bukan pengganti pelatihan resmi atau instruktur profesional.
 4. **Soal Latihan Buatan AI:** Jika model diminta membuat soal latihan, sistem wajib menyertakan label bahwa soal tersebut adalah simulasi AI dan bukan materi resmi ETS.
-
----
-
-## 📹 Panduan Rekaman Demo (Maksimal 5 Menit)
-
-Rincian naskah dan alokasi waktu per segmen demonstrasi telah disediakan pada:  
-👉 [`reports/demo_outline.md`](reports/demo_outline.md)
