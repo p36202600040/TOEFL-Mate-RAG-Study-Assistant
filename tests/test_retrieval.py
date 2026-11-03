@@ -9,7 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from src.retriever import get_chroma_client, get_or_create_collection, index_chunks, retrieve
+from src.retriever import get_chroma_client, get_or_create_collection, index_chunks, retrieve, enrich_query_for_retrieval
 from src.embeddings import embed_texts, embed_query
 
 
@@ -36,6 +36,17 @@ class TestEmbeddings:
     def test_embed_query(self):
         result = embed_query("What is TOEFL?")
         assert len(result) > 0
+
+
+class TestQueryEnrichment:
+    def test_indonesian_terms_are_enriched_without_answer_or_page(self):
+        enriched = enrich_query_for_retrieval("Apa rentang skor tiap bagian TOEFL?")
+        assert "score range" in enriched
+        assert "Halaman" not in enriched
+
+    def test_english_query_unchanged(self):
+        query = "What is the TOEFL score range?"
+        assert enrich_query_for_retrieval(query) == query
 
 
 class TestChromaDB:
@@ -110,4 +121,3 @@ class TestChromaDB:
         )
         # May return 0 results due to strict threshold
         assert isinstance(results, list)
-

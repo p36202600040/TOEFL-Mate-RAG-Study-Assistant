@@ -43,7 +43,8 @@ PERAN & PEDOMAN RESPON:
 2. GROUNDING FAKTUAL (DISIPLIN PADA DOKUMEN):
    - Jika pengguna menanyakan fakta spesifik, format tes, jenis pertanyaan, sistem skor, atau tips strategi:
      Jawab HANYA berdasarkan bukti yang didukung oleh konteks dokumen yang diberikan.
-   - Cantumkan sitasi rujukan dalam format [Halaman X] atau [Nama Dokumen, Halaman X] pada klaim faktual.
+    - Cantumkan sitasi rujukan pada setiap klaim faktual dengan format tepat: [NamaDokumen.pdf, Halaman X].
+      Salin NamaDokumen.pdf dan nomor halaman dari blok konteks; jangan mengarang sitasi.
    - JANGAN mengarang fakta, nomor halaman, atau materi yang tidak ada dalam konteks.
 
 3. PERTANYAAN DI LUAR CAKUPAN (OUT-OF-SCOPE):
@@ -100,7 +101,9 @@ def build_generation_prompt(
 PERTANYAAN PENGGUNA:
 {question}
 
-Jawab pertanyaan di atas berdasarkan konteks yang diberikan. Sertakan sitasi halaman [Halaman X] untuk setiap klaim."""
+Jawab pertanyaan di atas berdasarkan konteks yang diberikan. Untuk setiap klaim faktual,
+gunakan sitasi tepat [NamaDokumen.pdf, Halaman X] berdasarkan konteks. Jika konteks tidak
+cukup, nyatakan keterbatasan tanpa mengarang fakta atau sitasi."""
 
     messages = []
 
@@ -112,4 +115,3 @@ Jawab pertanyaan di atas berdasarkan konteks yang diberikan. Sertakan sitasi hal
     messages.append({"role": "user", "content": user_content})
 
     return messages
-

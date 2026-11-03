@@ -12,6 +12,22 @@ import config
 from src.prompts import build_system_prompt, build_generation_prompt
 
 
+def safe_generation_error(error: Exception) -> str:
+    """Petakan error tanpa mengembalikan pesan atau detail provider."""
+    name = type(error).__name__.lower()
+    status = getattr(error, "status_code", None)
+    message = str(error).lower()
+    if status == 429 or "ratelimit" in name or "rate_limit" in message or "rate limit" in message:
+        return "Layanan generasi sedang mencapai batas permintaan. Coba lagi beberapa saat lagi."
+    if status in (401, 403) or "authentication" in name or "permission" in name:
+        return "Autentikasi layanan generasi gagal. Periksa konfigurasi kredensial."
+    if "timeout" in name:
+        return "Layanan generasi melebihi batas waktu. Coba lagi."
+    if status == 404 or "notfound" in name:
+        return "Model yang dikonfigurasi tidak tersedia. Periksa GROQ_MODEL di .env."
+    return "Layanan generasi gagal memproses permintaan. Coba lagi atau periksa konfigurasi."
+
+
 def get_groq_client() -> Groq:
     """Buat Groq client. Raise error jika API key tidak tersedia."""
     if not config.GROQ_API_KEY:
@@ -50,7 +66,7 @@ def generate_answer(
     import os
 
     active_api_key = os.getenv("GROQ_API_KEY", config.GROQ_API_KEY).strip()
-    active_model = model or os.getenv("GROQ_MODEL", "openai/gpt-oss-120b").strip()
+    active_model = (model if model is not None else config.GROQ_MODEL).strip()
     used_model = active_model
 
     if not active_api_key:
@@ -70,7 +86,7 @@ def generate_answer(
             "model": used_model,
             "latency_seconds": 0.0,
             "contexts_used": contexts,
-            "error": str(e),
+            "error": safe_generation_error(e),
         }
 
     system_prompt = build_system_prompt(language, style, level)
@@ -93,10 +109,12 @@ def generate_answer(
         elapsed = time.time() - start_time
 
         answer = response.choices[0].message.content
+        if not isinstance(answer, str) or not answer.strip():
+            raise ValueError("empty response")
 
         return {
             "answer": answer,
-            "model": used_model,
+            "model": getattr(response, "model", None) or used_model,
             "latency_seconds": round(elapsed, 3),
             "contexts_used": contexts,
             "error": None,
@@ -104,16 +122,10 @@ def generate_answer(
 
     except Exception as e:
         elapsed = time.time() - start_time
-        error_msg = str(e)
-        # Jangan tampilkan API key di error message
-        if config.GROQ_API_KEY and config.GROQ_API_KEY in error_msg:
-            error_msg = error_msg.replace(config.GROQ_API_KEY, "[REDACTED]")
-
         return {
             "answer": "",
             "model": used_model,
             "latency_seconds": round(elapsed, 3),
             "contexts_used": contexts,
-            "error": f"Groq API error: {error_msg}",
+            "error": safe_generation_error(e),
         }
-

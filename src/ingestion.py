@@ -7,6 +7,7 @@ Nomor halaman PDF TIDAK selalu sama dengan nomor cetak buku.
 """
 import re
 import unicodedata
+import hashlib
 from pathlib import Path
 from typing import Optional
 
@@ -132,3 +133,11 @@ def create_chunks_from_pages(
 
     return all_chunks
 
+
+def document_sha256(pdf_path: str | Path) -> str:
+    """Kembalikan hash SHA-256 dokumen tanpa menyimpan isi dokumen pada manifest."""
+    digest = hashlib.sha256()
+    with open(pdf_path, "rb") as file:
+        for block in iter(lambda: file.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()

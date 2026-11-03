@@ -42,11 +42,12 @@
 - Jelaskan aturan grounding di system prompt
 
 ### 3:30–4:15 — Evaluasi
-- Jalankan `python scripts/evaluate.py`
-- Tunjukkan output: metrik Recall@5, Precision@5, Citation Accuracy, OOS Handling, Latency
-- Buka `evaluation/results.json` dan tunjukkan detail
-- Jalankan `python scripts/build_report.py`
-- Buka PDF laporan
+- Tunjukkan `evaluation/results_v2_k5.json` dan `evaluation/results_v2_k3.json`, bukan hasil historis yang kosong.
+- Jelaskan definisi Recall@K proyek sebagai Hit@K: setidaknya satu halaman target ada di top-k.
+- Tunjukkan angka aktual V2: top-k 5 Hit@5 0,5600 dan Precision@5 0,1920; top-k 3 Hit@3 0,4400 dan Precision@3 0,2000.
+- Jelaskan secara jujur bahwa run top-k 5 memiliki satu rate-limit, sedangkan top-k 3 memiliki 30 generation berhasil.
+- Tunjukkan bahwa correctness dan groundedness masih membutuhkan review manusia melalui `evaluation/human_review_template.csv`.
+- Buka `reports/methodology_evaluation_v2.pdf`; sebutkan status evaluasi parsial, bukan mengklaim hasil final.
 
 ### 4:15–4:45 — Unit Tests
 - Jalankan `pytest tests/ -v`
@@ -55,7 +56,7 @@
 
 ### 4:45–5:00 — Penutup
 - Ringkasan: pipeline RAG end-to-end yang berjalan
-- Keterbatasan: edisi 2012, penilaian manual belum lengkap
+- Keterbatasan: edisi 2012, Hit@5 belum mencapai target internal 0,70, dan penilaian manusia belum lengkap
 - Terima kasih
 
 ---
@@ -66,4 +67,3 @@
 - Gunakan resolusi layar yang cukup besar agar teks terbaca
 - Jangan tampilkan API key di layar
 - Jika ada error, jelaskan dan perbaiki — jujur lebih baik daripada sempurna
-

@@ -1,0 +1,2 @@
+id,reviewer,reviewed_at,answer_correctness,groundedness,claim_count,supported_claim_count,oos_rubric_result,citation_location_result,notes
+# Isi answer_correctness dengan CORRECT/PARTIALLY_CORRECT/INCORRECT/NOT_RATED. Isi groundedness dengan SUPPORTED/PARTIALLY_SUPPORTED/UNSUPPORTED/NOT_RATED. Jangan mengisi reviewer atau tanggal jika belum benar-benar diperiksa manusia.

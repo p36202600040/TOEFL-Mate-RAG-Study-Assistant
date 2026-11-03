@@ -1,5 +1,11 @@
 # Secrets
 .env
+.env.*
+!.env.example
+!.env.*.example
+.streamlit/secrets.toml
+*.pem
+*.key
 
 # Data — PDF berhak cipta, jangan distribute
 data/*.pdf
@@ -9,6 +15,14 @@ evaluation/toc_dump.txt
 
 # ChromaDB index
 chroma_db/
+.venv/
+venv/
+*.zip
+*.log
+
+# Artefak mentah lokal; gunakan evaluation/public/ untuk publikasi tersanitasi
+evaluation/results_v2_*.json
+evaluation/results_v2_*.csv
 
 # Python
 __pycache__/

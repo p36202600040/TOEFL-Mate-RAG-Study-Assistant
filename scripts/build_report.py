@@ -107,11 +107,19 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
     story.append(HRFlowable(width="100%", thickness=1, color=HexColor("#cccccc")))
     story.append(Spacer(1, 12))
 
+    run_status = summary.get("run_status", "HISTORICAL_OR_UNKNOWN")
     if not has_results:
         story.append(Paragraph(
             "⚠️ STATUS: RANCANGAN EVALUASI / BELUM DIUJI — "
             "Hasil evaluasi belum tersedia. Laporan ini berisi rancangan metodologi. "
             "Jalankan scripts/evaluate.py untuk mengisi hasil aktual.",
+            styles["BodyCustom"]
+        ))
+        story.append(Spacer(1, 12))
+    elif run_status != "COMPLETE":
+        story.append(Paragraph(
+            f"⚠️ STATUS: EVALUASI PARSIAL — run status: {run_status}. "
+            "Sebagian metrik generation dapat memiliki kegagalan API dan harus dibaca bersama status per item.",
             styles["BodyCustom"]
         ))
         story.append(Spacer(1, 12))
@@ -136,15 +144,15 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
     # ── 2. Sumber Data dan Batasan ───────────────────────────────────────
     story.append(Paragraph("2. Sumber Data dan Batasan", styles["SectionHeader"]))
     story.append(Paragraph(
-        "Sumber data adalah PDF \"The Official Guide to the TOEFL Test, Fourth Edition\" "
-        "(ETS, 2012). Dokumen ini adalah edisi 2012 dan format/kebijakan TOEFL mungkin "
-        "telah berubah sejak saat itu. Teks diekstrak menggunakan PyMuPDF dengan nomor halaman "
-        "1-based berdasarkan indeks PDF (bukan nomor cetak buku).",
+        "Sumber data adalah PDF yang tercatat pada manifest indeks aktif; evaluasi harus menyebutkan "
+        "sumber yang benar-benar diindeks. Dokumen Official Guide yang digunakan adalah edisi 2012, "
+        "sehingga format/kebijakan TOEFL mungkin telah berubah. Teks diekstrak menggunakan PyMuPDF "
+        "dengan nomor halaman 1-based berdasarkan indeks PDF (bukan nomor cetak buku).",
         styles["BodyCustom"]
     ))
     story.append(Paragraph(
         "<b>Batasan:</b><br/>"
-        "- Hanya mencakup satu sumber dokumen (tidak multi-dokumen).<br/>"
+        "- Cakupan hanya bergantung pada PDF yang benar-benar diindeks; sumber aktif harus diperiksa melalui manifest indeks.<br/>"
         "- Kualitas ekstraksi tergantung pada kualitas PDF (bukan OCR).<br/>"
         "- Evaluasi otomatis terbatas; beberapa metrik memerlukan penilaian manusia.<br/>"
         "- Dokumen berhak cipta; hanya kutipan seperlunya untuk penjelasan.",
@@ -196,8 +204,8 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
         "- 5 pertanyaan untuk menguji relevansi retrieval dan akurasi sitasi.<br/>"
         "- 5 pertanyaan di luar cakupan dokumen.<br/><br/>"
         "Setiap item memiliki id, category, question, reference_answer (jika relevan), "
-        "relevant_pages yang diverifikasi, dan catatan penilai. Label relevant_pages "
-        "diverifikasi dengan membuka halaman PDF yang dimaksud.",
+        "relevant_pages, dan catatan penilai. Status verifikasi manusia label harus dicatat pada "
+        "dataset atau lembar audit terpisah; jangan menyatakan label telah diverifikasi bila bukti itu belum tersedia.",
         styles["BodyCustom"]
     ))
 
@@ -315,13 +323,13 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
                     Paragraph("Variasi (top_k=3)", styles["SmallNote"]),
                     Paragraph(f"<b>{comp_r_str}</b>", styles["SmallNote"]),
                     Paragraph(f"<b>{comp_p_str}</b>", styles["SmallNote"]),
-                    Paragraph("Precision lebih tinggi karena ruang chunk lebih sempit, namun Recall lebih rendah.", styles["SmallNote"])
+                    Paragraph("Lihat nilai metrik pada kolom sebelumnya.", styles["SmallNote"])
                 ],
                 [
                     Paragraph("Baseline (top_k=5)", styles["SmallNote"]),
                     Paragraph(f"<b>{base_r_str}</b>", styles["SmallNote"]),
                     Paragraph(f"<b>{base_p_str}</b>", styles["SmallNote"]),
-                    Paragraph("Recall naik signifikan (+33% relatif) dengan trade-off penurunan precision.", styles["SmallNote"])
+                    Paragraph((f"Selisih recall baseline terhadap variasi: {(base_r - comp_r) * 100:+.1f} poin persentase; perubahan relatif {(base_r / comp_r - 1) * 100:+.1f}%." if isinstance(base_r, (int, float)) and isinstance(comp_r, (int, float)) and comp_r else "Perubahan relatif tidak tersedia tanpa nilai variasi nonnol."), styles["SmallNote"])
                 ]
             ]
             tc = Table(comp_table, colWidths=[3.2 * cm, 2.2 * cm, 2.2 * cm, 8.0 * cm])
@@ -418,7 +426,7 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
     story.append(Paragraph("8. Keterbatasan, Etika, dan Copyright", styles["SectionHeader"]))
     story.append(Paragraph(
         "<b>Keterbatasan:</b><br/>"
-        "- Sistem hanya mencakup satu dokumen sumber (edisi 2012).<br/>"
+        "- Cakupan dokumen harus diverifikasi terhadap metadata indeks aktual.<br/>"
         "- Format TOEFL dapat berubah; informasi mungkin tidak up-to-date.<br/>"
         "- Answer correctness dan groundedness memerlukan penilaian manual.<br/>"
         "- Kualitas embedding tergantung model yang digunakan.<br/>"
@@ -435,11 +443,10 @@ def build_report(results_path: Path, output_path: Path, comp_results_path: Path 
     story.append(Paragraph("9. Kesimpulan", styles["SectionHeader"]))
     if has_results:
         story.append(Paragraph(
-            "Pipeline RAG TOEFL Mate berhasil dibangun dan dievaluasi menggunakan dataset "
-            "30 pertanyaan. Hasil metrik otomatis tercatat di bagian 6. "
-            "Metrik manual (answer correctness, groundedness) memerlukan review lebih lanjut. "
-            "Sistem menunjukkan kemampuan retrieval dan generation yang dapat direproduksi "
-            "dengan konfigurasi yang tercatat.",
+            "Pipeline RAG TOEFL Mate telah dijalankan pada dataset evaluasi dan hasil otomatis "
+            "tercatat di bagian 6. Interpretasi generation harus mengikuti status run serta error per item. "
+            "Metrik manual (answer correctness, groundedness) tetap memerlukan review manusia. "
+            "Konfigurasi evaluasi dicatat agar eksperimen dapat diaudit dan diulang.",
             styles["BodyCustom"]
         ))
     else:
@@ -474,4 +481,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

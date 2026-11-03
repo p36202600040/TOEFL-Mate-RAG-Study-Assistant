@@ -1,5 +1,20 @@
 # TOEFL Mate: RAG Study Assistant 📚
 
+## Dokumen utama untuk pengumpulan
+
+- [Laporan metodologi evaluasi dan hasil final UTS](reports/methodology_evaluation_final_uts_20261103.pdf)
+- [Briefing kelompok dan alur presentasi](reports/briefing_presentasi_toefl_mate.pdf)
+- [Panduan GitHub Desktop, VPS aaPanel, dan domain](docs/GITHUB_VPS.md)
+- [Salinan hasil V2 tersanitasi untuk publikasi](evaluation/public/)
+
+Laporan lain merupakan arsip iterasi. Angka V2 bersifat historis, bukan hasil evaluasi source-aware terbaru atau pengujian deployment. Artefak mentah V2 tetap lokal; salinan publik menghapus pesan error provider tanpa menghitung ulang metrik.
+
+> **Status evaluasi:** prototipe; correctness dan groundedness belum divalidasi manusia. Label historis yang hanya berisi halaman tidak menentukan sumber dan tidak dihitung dalam metrik source-aware baru. Kecocokan lokasi sitasi bukan bukti dukungan klaim.
+
+> **Indeks:** ingestion membangun koleksi kandidat, bukan mengaktifkannya otomatis. Setelah memeriksa manifest dan jumlah chunk, atur `CHROMA_COLLECTION` secara eksplisit ke nama kandidat untuk mengaktifkannya, lalu mulai ulang aplikasi. Indeks lama tanpa manifest lengkap berstatus `UNKNOWN`; kompatibilitasnya belum terbukti. Jangan hapus indeks lama untuk melakukan aktivasi.
+
+> **Evaluasi:** dataset baru dapat memakai `relevant_sources`, misalnya `[{"source":"book.pdf","page":35}]`. Hit@k menghitung query dengan sedikitnya satu pasangan relevan; precision menghitung chunk relevan dibagi k, termasuk chunk duplikat. Retrieval gagal dan label tanpa sumber dikecualikan. Indikator frasa OOS bukan akurasi penanganan OOS. CLI menolak output yang sudah ada, tetapi checkpoint/resume belum tersedia.
+
 **Tugas:** Ujian Tengah Semester (UTS) — Pengantar Generative AI  
 **Fokus:** Prototipe RAG end-to-end yang berjalan nyata, evaluasi sistematis, laporan metodologi PDF, dan video demo.  
 **Dokumen Sumber:** *The Official Guide to the TOEFL Test, Fourth Edition* (ETS, 2012).
@@ -21,7 +36,7 @@
 [Ekstraksi Teks per Halaman + Normalisasi Unicode]
          │
          ▼ (Chunk size: 500 chars, Overlap: 100 chars)
-[Potongan Teks (3,911 Chunks + Metadata)]
+[Potongan Teks + Metadata sumber/halaman]
          │
          ▼ (SentenceTransformers: all-MiniLM-L6-v2)
 [Vektor Embedding 384 Dimensi (Lokal)]
@@ -35,8 +50,8 @@
          ▼
 [Penyusunan Prompt Terstruktur + SOP Aturan Grounding]
          │
-         ▼ (Groq Cloud API - Llama 3.1 / Mixtral)
-[Generasi Jawaban Berbasis Konteks + Sitasi [Halaman X]]
+▼ (Groq Cloud API - model dari GROQ_MODEL)
+[Generasi Jawaban Berbasis Konteks + Sitasi [NamaDokumen.pdf, Halaman X]]
          │
          ▼
 [Streamlit Web UI / Pipeline Evaluasi]
@@ -45,9 +60,9 @@
 ### Komponen Kunci:
 1. **Ekstraksi PDF:** PyMuPDF (`fitz`) mengekstrak teks tiap halaman secara berurutan dengan mempertahankan indeks halaman 1-based (`PDF Page 1..668`). Dilengkapi normalisasi Unicode (`NFKD`) untuk mengurai ligatur (`fi`, `fl`).
 2. **Chunking:** Chunk berukuran 500 karakter dengan overlap 100 karakter untuk mempertahankan kesinambungan konteks antar batas chunk.
-3. **Embedding Lokal:** Model `sentence-transformers/all-MiniLM-L6-v2` (384 dimensi) berjalan 100% lokal di CPU/GPU tanpa mengirim isi buku ke API eksternal.
+3. **Embedding Lokal:** Model Sentence Transformers dari `EMBEDDING_MODEL` berjalan lokal di CPU/GPU. Saat generasi, hanya potongan hasil retrieval (bukan seluruh PDF) dikirim ke Groq.
 4. **Vector Store:** ChromaDB dengan persistent storage di folder `chroma_db/`, menggunakan metrik jarak L2 (`hnsw:space: l2`).
-5. **Generasi LLM:** Groq API (`llama-3.1-8b-instant`) dengan aturan SOP ketat: jawaban hanya didasarkan pada konteks yang di-retrieve, mencantumkan sitasi `[Halaman X]`, dan melarang klaim di luar konteks.
+5. **Generasi LLM:** Groq API memakai satu konfigurasi `GROQ_MODEL` untuk UI, generator, dan evaluasi. SOP mewajibkan grounding serta sitasi `[NamaDokumen.pdf, Halaman X]` pada klaim faktual.
 6. **Antarmuka Pengguna:** Streamlit Web UI dengan kontrol SOP (pilihan bahasa Indonesia/Inggris, gaya jawaban ringkas/bertahap, tingkat kesulitan dasar/menengah/lanjutan, slider `top_k`, dan expander cuplikan sumber halaman).
 
 ---
@@ -127,16 +142,13 @@ RELEVANCE_THRESHOLD=1.5
 > **Catatan Keamanan:** Jangan pernah melakukan *commit* atau membagikan file `.env` ke publik. File `.env` sudah dimasukkan ke dalam `.gitignore`.
 
 ### 4. Ingestion PDF ke ChromaDB
-Pastikan file PDF `eBook_TOEFL_Official_Guide_4e.pdf` berada di dalam folder `data/`. Jalankan skrip ingestion:
+Pastikan PDF sumber berada di dalam folder `data/`. Jalankan skrip ingestion:
 
 ```powershell
 python scripts/ingest_pdf.py
 ```
 
-*Output:*
-- Mengekstrak 668 halaman teks.
-- Menghasilkan 3.911 potongan teks (*chunks*) terindeks dengan metadata `page`, `source`, dan `chunk_id`.
-- Waktu proses: ~60 detik pada CPU standar.
+Skrip membangun **koleksi kandidat** dan manifest audit di `chroma_db/manifests/`; koleksi aktif tidak dihapus atau diganti otomatis. Setelah memverifikasi kandidat, aktifkan nama koleksi yang dicetak skrip melalui `CHROMA_COLLECTION` di `.env`, lalu restart aplikasi. Jika build gagal, indeks aktif tetap digunakan.
 
 ### 5. Menjalankan Web UI Streamlit
 Jalankan aplikasi web lokal:
@@ -156,13 +168,11 @@ Jalankan rangkaian unit test lengkap menggunakan `pytest`:
 python -m pytest tests/ -v
 ```
 
-**Hasil Pengujian Aktual:**
-- Total tests: **49 tests**
-- Status: **49 passed, 0 failed** (100% pass)
-- Komponen teruji:
+**Hasil pengujian harus selalu dibaca dari run terbaru.** Komponen teruji:
   - `test_ingestion.py`: Pembersihan spasi, karakter kontrol, normalisasi unicode, chunking dengan overlap, validasi batas argumen.
   - `test_retrieval.py`: Embedding dimensi, konsistensi representasi vektor, pembuatan koleksi ChromaDB, pencarian query berbasis kemiripan L2, filtering threshold.
-  - `test_citations.py`: Konstruksi SOP prompt dinamis dwibahasa, ekstraksi sitasi regex `[Halaman X]`, kalkulasi metrik Recall@K, Precision@K, akurasi sitasi, dan deteksi respon *out-of-scope*.
+   - `test_citations.py`: prompt dwibahasa, sitasi sumber-halaman, variasi Unicode, dan validasi terhadap konteks multi-dokumen.
+   - `test_config.py`, `test_ingestion_safety.py`, dan `test_evaluation_pipeline.py`: validasi konfigurasi, keamanan build kandidat, serta status evaluasi gagal/parsial.
 
 ---
 
@@ -176,29 +186,30 @@ Dataset terdiri atas **30 pertanyaan** yang telah diverifikasi manusia terhadap 
 - **5 Pertanyaan Out-of-Scope:** Pertanyaan di luar buku panduan (misal: biaya tes tahun 2025, visa Australia, IELTS, UTBK) dengan target sistem mengakui keterbatasan.
 
 ### 2. Menjalankan Evaluasi
-Jalankan skrip evaluasi baseline (`top_k=5`):
+Jalankan skrip evaluasi baseline (`top_k=5`) ke berkas baru agar artefak historis tidak tertimpa:
 ```powershell
-python scripts/evaluate.py --top_k 5
+python scripts/evaluate.py --top_k 5 --output evaluation/results_v2_k5.json
 ```
 
 Jalankan evaluasi variasi komparasi (`top_k=3`):
 ```powershell
-python scripts/evaluate.py --top_k 3 --output evaluation/results_k3.json
+python scripts/evaluate.py --top_k 3 --output evaluation/results_v2_k3.json
 ```
 
-### 3. Hasil Pengujian Aktual
+### 3. Status hasil historis dan interpretasi metrik
 
 | Metrik Evaluasi | Baseline (`top_k=5`) | Variasi (`top_k=3`) | Keterangan & Definisi |
 | :--- | :---: | :---: | :--- |
 | **Recall@K** | **0.3200** (32.0%) | **0.2400** (24.0%) | Proporsi query yang berhasil memuat minimal 1 halaman target di top-K |
 | **Precision@K** | **0.1040** (10.4%) | **0.1333** (13.3%) | Rata-rata proporsi chunk relevan terhadap total chunk yang diambil |
-| **Citation Accuracy** | *Tergantung Groq API* | *Tergantung Groq API* | Proporsi sitasi yang merujuk halaman target yang benar |
+| **Citation Accuracy** | *Belum dihasilkan* | *Belum dihasilkan* | Run historis tidak memiliki jawaban generation |
 | **OOS Handling** | *Tergantung Groq API* | *Tergantung Groq API* | Proporsi pertanyaan di luar cakupan yang diakui secara jujur |
 | **Avg Latency** | *Tergantung Groq API* | *Tergantung Groq API* | Waktu respon generasi LLM per pertanyaan (detik) |
 | **Answer Correctness** | *Review Manual* | *Review Manual* | Kesesuaian jawaban terhadap kunci jawaban acuan |
 | **Groundedness** | *Review Manual* | *Review Manual* | Proporsi klaim jawaban yang didukung oleh konteks dokumen |
 
-> **Analisis Trade-Off:**  
+> **Status historis:** run ini mengevaluasi retrieval karena seluruh generation gagal saat API key belum dikonfigurasi. Jangan gunakan nilai ini untuk mengklaim correctness, groundedness, sitasi, OOS, atau latency generation.
+> **Analisis Trade-Off retrieval:**
 > Peningkatan `top_k` dari 3 menjadi 5 meningkatkan **Recall** sebesar **+33.3% relatif** (dari 0.2400 ke 0.3200), membuktikan jendela konteks yang lebih luas membantu menemukan halaman target. Sebaliknya, **Precision** menurun dari 0.1333 menjadi 0.1040 akibat masuknya potongan teks non-target.
 
 ### 4. Membangun Laporan PDF Metodologi
@@ -206,8 +217,10 @@ Jalankan skrip generator PDF berbasis ReportLab:
 ```powershell
 python scripts/build_report.py
 ```
-File laporan terformat rapi akan dibuat di:  
-👉 `reports/methodology_evaluation.pdf`
+Untuk hasil baru, gunakan output baru agar laporan historis tetap terjaga:
+```powershell
+python scripts/build_report.py --results evaluation/results_v2_k5.json --comparison evaluation/results_v2_k3.json --output reports/methodology_evaluation_v2.pdf
+```
 
 ---
 
@@ -224,4 +237,3 @@ File laporan terformat rapi akan dibuat di:
 
 Rincian naskah dan alokasi waktu per segmen demonstrasi telah disediakan pada:  
 👉 [`reports/demo_outline.md`](reports/demo_outline.md)
-

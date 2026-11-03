@@ -11,11 +11,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.prompts import build_system_prompt, build_generation_prompt
 from src.evaluation import (
     extract_cited_pages,
+    extract_citations,
+    validate_citations_against_contexts,
     compute_recall_at_k,
     compute_precision_at_k,
     compute_citation_accuracy,
     check_out_of_scope,
 )
+from src.generator import generate_answer
 
 
 class TestBuildSystemPrompt:
@@ -94,6 +97,23 @@ class TestExtractCitedPages:
         pages = extract_cited_pages(text)
         assert pages == []
 
+    def test_canonical_source_page_citation(self):
+        citations = extract_citations("Skor [book.pdf, Halaman 35].")
+        assert citations == [{"source": "book.pdf", "page": 35}]
+
+    def test_unicode_bracket_citation(self):
+        citations = extract_citations("Skor 【book.pdf, Halaman 35】.")
+        assert citations == [{"source": "book.pdf", "page": 35}]
+
+    def test_citation_context_validation_multi_document(self):
+        citations = extract_citations("[book.pdf, Halaman 35] [Halaman 70]")
+        checked = validate_citations_against_contexts(citations, [
+            {"source": "book.pdf", "page": 35},
+            {"source": "other.pdf", "page": 70},
+        ])
+        assert checked[0]["in_retrieved_context"] is True
+        assert checked[1]["in_retrieved_context"] is False
+
 
 class TestMetrics:
     """Test evaluation metrics."""
@@ -143,3 +163,18 @@ class TestOutOfScope:
         text = "Dokumen tidak membahas topik ini secara spesifik."
         assert check_out_of_scope(text) is True
 
+
+def test_generation_rate_limit_error_is_sanitized(monkeypatch):
+    class FakeCompletions:
+        def create(self, **kwargs):
+            raise RuntimeError("rate_limit org_private_identifier")
+
+    class FakeClient:
+        class chat:
+            completions = FakeCompletions()
+
+    monkeypatch.setattr("src.generator.Groq", lambda api_key: FakeClient())
+    monkeypatch.setattr("src.generator.os", None, raising=False)
+    result = generate_answer("Q", [], model="test-model")
+    assert "org_private_identifier" not in result["error"]
+    assert "batas permintaan" in result["error"]

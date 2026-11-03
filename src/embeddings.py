@@ -18,9 +18,9 @@ def get_model(model_name: str | None = None) -> SentenceTransformer:
     print(f"[Embeddings] Loading model: {name}")
     model = SentenceTransformer(name)
     dim = (
-        model.get_sentence_embedding_dimension()
-        if hasattr(model, "get_sentence_embedding_dimension")
-        else getattr(model, "get_embedding_dimension", lambda: 384)()
+        model.get_embedding_dimension()
+        if hasattr(model, "get_embedding_dimension")
+        else model.get_sentence_embedding_dimension()
     )
     print(f"[Embeddings] Model loaded: {name}, dim={dim}")
     return model
@@ -45,4 +45,3 @@ def embed_query(query: str, model_name: str | None = None) -> list[float]:
     model = get_model(model_name)
     embedding = model.encode(query, convert_to_numpy=True)
     return embedding.tolist()
-

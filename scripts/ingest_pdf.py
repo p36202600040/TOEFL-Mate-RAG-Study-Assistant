@@ -9,14 +9,18 @@ Nomor halaman mengikuti indeks PDF 1-based.
 """
 import sys
 import time
+import json
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
 # Tambahkan project root ke path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config
-from src.ingestion import extract_pages, create_chunks_from_pages
+from src.ingestion import extract_pages, create_chunks_from_pages, document_sha256
 from src.retriever import get_chroma_client, get_or_create_collection, index_chunks
+from src.embeddings import get_model
 
 
 def ingest_pdf(pdf_path: Path, collection, start_id: int = 0) -> int:
@@ -51,6 +55,44 @@ def ingest_pdf(pdf_path: Path, collection, start_id: int = 0) -> int:
     return count
 
 
+def write_manifest(collection_name: str, documents: list[dict], chunk_count: int) -> Path:
+    """Simpan metadata build yang dapat diaudit tanpa menyimpan teks atau rahasia."""
+    config.CHROMA_MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "schema_version": 2,
+        "collection": collection_name,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "embedding_model": config.EMBEDDING_MODEL,
+        "embedding_dimension": get_model().get_sentence_embedding_dimension(),
+        "chunk_size": config.CHUNK_SIZE,
+        "chunk_overlap": config.CHUNK_OVERLAP,
+        "chunk_count": chunk_count,
+        "documents": documents,
+    }
+    path = config.CHROMA_MANIFEST_DIR / f"{collection_name}.json"
+    path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+def build_candidate(pdf_paths: list[Path], client, collection_name: str) -> tuple[int, list[dict]]:
+    """Bangun koleksi kandidat; koleksi aktif tidak disentuh oleh fungsi ini."""
+    collection = get_or_create_collection(client, collection_name)
+    total_chunks = 0
+    current_start_id = 0
+    documents = []
+    for pdf_path in pdf_paths:
+        indexed = ingest_pdf(pdf_path, collection, start_id=current_start_id)
+        total_chunks += indexed
+        current_start_id += indexed
+        documents.append({
+            "source": pdf_path.name,
+            "sha256": document_sha256(pdf_path),
+        })
+    if total_chunks <= 0 or collection.count() != total_chunks:
+        raise RuntimeError("Verifikasi koleksi kandidat gagal: jumlah chunk tidak konsisten")
+    return total_chunks, documents
+
+
 def main():
     start_time = time.time()
 
@@ -64,7 +106,20 @@ def main():
     if not pdf_paths:
         print("[Ingest] ERROR: Tidak ada file PDF ditemukan.")
         print(f"[Ingest] Letakkan file PDF di folder: {config.DATA_DIR}")
-        sys.exit(1)
+        return 1
+
+    missing_paths = [p for p in pdf_paths if not p.exists()]
+    if missing_paths:
+        for path in missing_paths:
+            print(f"[Ingest] ERROR: File tidak ditemukan — {path}")
+        print("[Ingest] Indeks aktif tidak diubah.")
+        return 1
+
+    try:
+        config.validate_settings()
+    except ValueError as error:
+        print(f"[Ingest] ERROR konfigurasi: {error}")
+        return 1
 
     print(f"[Ingest] Ditemukan {len(pdf_paths)} file PDF:")
     for p in pdf_paths:
@@ -76,33 +131,30 @@ def main():
     print(f"  - ChromaDB dir: {config.CHROMA_DIR}")
     print(f"  - Collection: {config.CHROMA_COLLECTION}")
 
-    # Reset collection satu kali di awal untuk rebuild bersih multi-dokumen
     client = get_chroma_client()
+    candidate_name = f"{config.CHROMA_COLLECTION}_candidate_{uuid.uuid4().hex[:8]}"
+    print(f"[Ingest] Membangun koleksi kandidat: {candidate_name}")
     try:
-        client.delete_collection(config.CHROMA_COLLECTION)
-        print("[Ingest] Collection lama dihapus untuk fresh multi-document build")
-    except Exception:
-        pass
-
-    collection = get_or_create_collection(client)
-
-    total_chunks = 0
-    current_start_id = 0
-    for pdf_path in pdf_paths:
-        if not pdf_path.exists():
-            print(f"[Ingest] SKIP: File tidak ditemukan — {pdf_path}")
-            continue
+        total_chunks, documents = build_candidate(pdf_paths, client, candidate_name)
+        manifest_path = write_manifest(candidate_name, documents, total_chunks)
+    except Exception as error:
+        print(f"[Ingest] ERROR build kandidat: {error}")
         try:
-            indexed = ingest_pdf(pdf_path, collection, start_id=current_start_id)
-            total_chunks += indexed
-            current_start_id += indexed
-        except Exception as e:
-            print(f"[Ingest] ERROR pada {pdf_path.name}: {e}")
+            client.delete_collection(candidate_name)
+        except Exception:
+            pass
+        print("[Ingest] Indeks aktif tidak diubah.")
+        return 1
 
     elapsed = time.time() - start_time
-    print(f"\n[Ingest] TOTAL KESELURUHAN: {total_chunks} chunks dari {len(pdf_paths)} dokumen diindex dalam {elapsed:.1f} detik")
+    print(f"\n[Ingest] KANDIDAT BERHASIL: {total_chunks} chunks dari {len(pdf_paths)} dokumen dalam {elapsed:.1f} detik")
+    print(f"[Ingest] Manifest: {manifest_path}")
+    print(
+        "[Ingest] Koleksi aktif tidak diubah otomatis. Untuk mengaktifkan kandidat, "
+        f"atur CHROMA_COLLECTION={candidate_name} di .env setelah verifikasi."
+    )
+    return 0
 
 
 if __name__ == "__main__":
-    main()
-
+    sys.exit(main())

@@ -28,6 +28,7 @@ EMBEDDING_MODEL = os.getenv(
 
 # ── ChromaDB ─────────────────────────────────────────────────────────────
 CHROMA_COLLECTION = os.getenv("CHROMA_COLLECTION", "toefl_mate")
+CHROMA_MANIFEST_DIR = CHROMA_DIR / "manifests"
 
 # ── Retrieval ────────────────────────────────────────────────────────────
 TOP_K = int(os.getenv("TOP_K", "5"))
@@ -38,8 +39,9 @@ RELEVANCE_THRESHOLD = float(os.getenv("RELEVANCE_THRESHOLD", "1.5"))
 
 # ── Groq API ─────────────────────────────────────────────────────────────
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-GROQ_MODEL = os.getenv("GROQ_MODEL", "qwen/qwen3.8-27b")
-# Model diverifikasi langsung terhadap Groq API endpoint yang aktif (qwen/qwen3.8-27b).
+# Satu-satunya default model. UI, generator, dan evaluasi wajib memakai nilai ini.
+# Nama aktual dapat dioverride melalui .env setelah diverifikasi pada akun Groq pengguna.
+GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant").strip()
 
 GROQ_MAX_TOKENS = int(os.getenv("GROQ_MAX_TOKENS", "2048"))
 GROQ_TEMPERATURE = float(os.getenv("GROQ_TEMPERATURE", "0.2"))
@@ -49,3 +51,18 @@ DEFAULT_LANGUAGE = os.getenv("DEFAULT_LANGUAGE", "Indonesia")
 DEFAULT_STYLE = os.getenv("DEFAULT_STYLE", "penjelasan bertahap")
 DEFAULT_LEVEL = os.getenv("DEFAULT_LEVEL", "menengah")
 
+
+def validate_settings() -> None:
+    """Validasi konfigurasi non-rahasia sebelum ingestion/evaluasi dijalankan."""
+    if CHUNK_SIZE <= 0:
+        raise ValueError("CHUNK_SIZE harus lebih besar dari 0")
+    if CHUNK_OVERLAP < 0 or CHUNK_OVERLAP >= CHUNK_SIZE:
+        raise ValueError("CHUNK_OVERLAP harus >= 0 dan lebih kecil dari CHUNK_SIZE")
+    if TOP_K <= 0:
+        raise ValueError("TOP_K harus lebih besar dari 0")
+    if RELEVANCE_THRESHOLD < 0:
+        raise ValueError("RELEVANCE_THRESHOLD harus >= 0")
+    if not EMBEDDING_MODEL.strip():
+        raise ValueError("EMBEDDING_MODEL tidak boleh kosong")
+    if not GROQ_MODEL:
+        raise ValueError("GROQ_MODEL tidak boleh kosong")

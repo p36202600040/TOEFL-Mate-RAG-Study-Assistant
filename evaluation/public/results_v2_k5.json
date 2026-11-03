@@ -1,0 +1,1556 @@
+{
+  "config": {
+    "top_k": 5,
+    "chunk_size": 500,
+    "chunk_overlap": 100,
+    "embedding_model": "all-MiniLM-L6-v2",
+    "groq_model": "openai/gpt-oss-120b",
+    "relevance_threshold": 1.5,
+    "timestamp": "2026-10-30T12:58:33.146554+00:00",
+    "run_id": "20261030T125833Z_733f46",
+    "dataset_version": "historical_test_questions",
+    "prompt_version": "canonical-source-page-citations-v2"
+  },
+  "metrics": {
+    "recall_at_k": {
+      "value": 0.56,
+      "n_samples": 25,
+      "definition": "Fraction of queries where at least one relevant page appeared in top-k results"
+    },
+    "precision_at_k": {
+      "value": 0.19200000000000006,
+      "n_samples": 25,
+      "definition": "Average (relevant pages in top-k / k)"
+    },
+    "citation_accuracy_micro": {
+      "value": 0.325,
+      "n_samples": 40,
+      "definition": "Total cited pages matching labeled pages / all cited pages; location validity is recorded separately"
+    },
+    "citation_coverage": {
+      "value": 0.56,
+      "n_samples": 25,
+      "definition": "In-scope answers with at least one parseable citation / in-scope questions"
+    },
+    "out_of_scope_handling": {
+      "value": 0.8,
+      "n_samples": 5,
+      "definition": "OOS questions correctly acknowledged / total OOS questions"
+    },
+    "avg_generation_latency_seconds": {
+      "value": 10.304275862068966,
+      "n_samples": 29,
+      "definition": "Average Groq generation latency for successful answers (seconds)"
+    },
+    "avg_retrieval_latency_seconds": {
+      "value": 0.07813333333333333,
+      "n_samples": 30,
+      "definition": "Average local retrieval latency, may include cold embedding load"
+    },
+    "avg_end_to_end_latency_seconds": {
+      "value": 10.637310344827586,
+      "n_samples": 29,
+      "definition": "Average retrieval-to-answer latency for successful answers (seconds)"
+    },
+    "answer_correctness": {
+      "value": "REQUIRES_HUMAN_REVIEW",
+      "definition": "Fraction of answers matching reference answer rubric (manual)"
+    },
+    "groundedness": {
+      "value": "REQUIRES_HUMAN_REVIEW",
+      "definition": "Fraction of factual claims supported by retrieved context (manual)"
+    }
+  },
+  "results": [
+    {
+      "id": "fact_01",
+      "category": "factual",
+      "question": "Berapa skala skor total untuk tes TOEFL iBT dan berapa rentang skor untuk setiap bagiannya?",
+      "retrieved_pages": [
+        207,
+        36,
+        204,
+        298,
+        36
+      ],
+      "retrieved_chunks": [
+        "ebookto_01248",
+        "ebookto_00159",
+        "ebookto_01225",
+        "ebookto_01741",
+        "ebookto_00160"
+      ],
+      "retrieved_distances": [
+        0.9209622144699097,
+        0.9368267059326172,
+        0.9690186977386475,
+        0.9782470464706421,
+        0.9795807600021362
+      ],
+      "answer": "**Skala skor TOEFL iBT (berdasarkan konteks yang tersedia)**  \n\n| Bagian tes | Skala skor yang disebutkan dalam konteks | Keterangan tambahan |\n|------------|-------------------------------------------|---------------------|\n| **Speaking** | 0 – 30 (skor terkonversi menjadi skor berskala 0‑30) | Setiap skor individu dijumlahkan, lalu dikonversi menjadi skor berskala 0‑30 untuk bagian Speaking. **[eBook_TOEFL_Official_Guide_4e.pdf, Halaman 207]** |\n| **Reading** | Skor berskala yang diberikan dalam **rentang** (contoh: 19 – 21 untuk 26 poin mentah) | Tabel konversi mengubah poin mentah menjadi rentang skor berskala (biasanya 0‑30), namun rentang lengkap tidak tercantum dalam cuplikan yang ada. **[eBook_TOEFL_Official_Guide_4e.pdf, Halaman 298]** |\n| **Listening** | – | Tidak ada informasi tentang skala atau rentang skor dalam konteks yang diberikan. |\n| **Writing** | – | Tidak ada informasi tentang skala atau rentang skor dalam konteks yang diberikan. |\n\n### Total skor TOEFL iBT\n- **Informasi tentang total skor (misalnya 0‑120) tidak terdapat dalam cuplikan yang disediakan.**  \n- Karena masing‑masing empat bagian (Reading, Listening, Speaking, Writing) biasanya memiliki skala 0‑30, total maksimal secara teoritis adalah 120, tetapi **hal ini tidak dapat dikonfirmasi secara eksplisit dari dokumen yang diberikan**.\n\n---\n\n#### 📚 Sumber\n- **Speaking:** eBook_TOEFL_Official_Guide_4e.pdf, Halaman 207  \n- **Reading (contoh rentang skor):** eBook_TOEFL_Official_Guide_4e.pdf, Halaman 298  \n\n> *Catatan:* Jika Anda memerlukan detail lengkap tentang skala Listening dan Writing, atau tabel konversi lengkap untuk Reading, silakan merujuk pada bagian lain dari *The Official Guide to the TOEFL Test* yang tidak termasuk dalam cuplikan ini.",
+      "cited_pages": [
+        207,
+        298
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 207,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 298,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 1.597,
+      "generation_latency_seconds": 2.702,
+      "end_to_end_latency_seconds": 4.561,
+      "latency_seconds": 2.702,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_02",
+      "category": "factual",
+      "question": "Berapa jumlah jenis pertanyaan pada Reading section tes TOEFL iBT dan dibagi ke dalam berapa kategori keterampilan?",
+      "retrieved_pages": [
+        52,
+        359,
+        475,
+        247,
+        10
+      ],
+      "retrieved_chunks": [
+        "ebookto_00232",
+        "ebookto_02133",
+        "ebookto_02793",
+        "ebookto_01512",
+        "ebookto_00042"
+      ],
+      "retrieved_distances": [
+        0.9194825887680054,
+        0.9246717691421509,
+        0.9473556280136108,
+        0.9575792551040649,
+        0.9878166317939758
+      ],
+      "answer": "**Jumlah jenis pertanyaan pada Reading section TOEFL iBT:** **10 jenis**  \n**Pembagian ke dalam kategori keterampilan:** **3 kategori**  \n\n| Kategori keterampilan | Deskripsi singkat |\n|----------------------|-------------------|\n| **Basic Information** | Menguji kemampuan menemukan fakta langsung dari teks. |\n| **Inferencing** | Menguji kemampuan menarik kesimpulan atau membaca makna tersirat. |\n| **Reading to Learn** | Menguji kemampuan memahami struktur, fungsi, atau tujuan informasi dalam teks akademik. |\n\n> “Reading questions cover Basic Information skills, Inferencing skills, and Reading to Learn skills. There are **10 question types**.” [**eBook_TOEFL_Official_Guide_4e.pdf, Halaman 52**]\n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 52.",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.024,
+      "generation_latency_seconds": 1.391,
+      "end_to_end_latency_seconds": 1.672,
+      "latency_seconds": 1.391,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_03",
+      "category": "factual",
+      "question": "Berapa jumlah materi kuliah (lectures) dan percakapan (conversations) pada Listening section TOEFL iBT?",
+      "retrieved_pages": [
+        137,
+        140,
+        138,
+        137,
+        448
+      ],
+      "retrieved_chunks": [
+        "ebookto_00829",
+        "ebookto_00842",
+        "ebookto_00831",
+        "ebookto_00825",
+        "ebookto_02614"
+      ],
+      "retrieved_distances": [
+        0.8908498287200928,
+        0.8961877822875977,
+        0.9485921263694763,
+        0.9755713939666748,
+        0.9862481355667114
+      ],
+      "answer": "**Jumlah materi yang akan Anda dengarkan pada bagian Listening TOEFL iBT**\n\n| Jenis materi | Jumlah (rentang) |\n|--------------|------------------|\n| **Kuliah (lectures)** | 4 – 6 buah |\n| **Percakapan (conversations)** | 2 – 3 buah |\n\nKeterangan ini diambil dari penjelasan resmi dalam *The Official Guide to the TOEFL Test* edisi ke‑4, yang menyebutkan:\n\n> “In the TOEFL iBT Listening section you will listen to four to six lectures and two to three conversations.”【eBook_TOEFL_Official_Guide_4e.pdf, Halaman 137】\n\n📚 **Sumber**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 137.",
+      "cited_pages": [
+        137
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 137,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 1.333,
+      "end_to_end_latency_seconds": 1.621,
+      "latency_seconds": 1.333,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "citation_accuracy": 1.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_04",
+      "category": "factual",
+      "question": "Berapa lama waktu persiapan dan waktu berbicara yang diberikan untuk Speaking Question 1 (Independent Speaking)?",
+      "retrieved_pages": [
+        179,
+        208,
+        137,
+        197,
+        208
+      ],
+      "retrieved_chunks": [
+        "ebookto_01066",
+        "ebookto_01250",
+        "ebookto_00826",
+        "ebookto_01183",
+        "ebookto_01251"
+      ],
+      "retrieved_distances": [
+        0.6879959106445312,
+        0.7577878832817078,
+        0.7712037563323975,
+        0.8104439377784729,
+        0.8369857668876648
+      ],
+      "answer": "**Waktu yang diberikan untuk Speaking Question 1 (Independent Speaking)**  \n\n| Tahap | Durasi yang disebutkan dalam dokumen |\n|-------|--------------------------------------|\n| **Waktu persiapan** | **Tidak disebutkan** dalam konteks yang tersedia. |\n| **Waktu berbicara (respons)** | 45 atau 60 detik untuk setiap pertanyaan Speaking. [**eBook_TOEFL_Official_Guide_4e.pdf, Halaman 179**] dan [**eBook_TOEFL_Official_Guide_4e.pdf, Halaman 208**] |\n\n**Penjelasan**\n\n- Pada **Halaman 179** dijelaskan bahwa “untuk setiap pertanyaan, Anda diberikan **45 atau 60 detik** untuk merespons” dan bahwa “waktu respons yang diizinkan untuk setiap pertanyaan adalah 45 atau 60 detik.”  \n- Pada **Halaman 208** ditegaskan kembali bahwa “waktu yang dialokasikan untuk setiap respons speaking dianggap cukup untuk memberikan jawaban lengkap,” tanpa menyebutkan berapa lama waktu persiapan sebelum berbicara.  \n\nKarena dokumen yang diberikan tidak mencantumkan secara eksplisit **waktu persiapan** (misalnya 15 detik) untuk Independent Speaking, kami tidak dapat menyatakan angka tersebut dengan kepastian berdasarkan sumber yang ada.\n\n---\n\n📚 **Sumber**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 179  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 208  ",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.024,
+      "generation_latency_seconds": 2.653,
+      "end_to_end_latency_seconds": 2.906,
+      "latency_seconds": 2.653,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_05",
+      "category": "factual",
+      "question": "Ada berapa tugas dalam bagian Writing tes TOEFL iBT dan apa saja nama kedua tugas tersebut?",
+      "retrieved_pages": [
+        204,
+        10,
+        21,
+        11,
+        207
+      ],
+      "retrieved_chunks": [
+        "ebookto_01225",
+        "ebookto_00044",
+        "ebookto_00096",
+        "ebookto_00047",
+        "ebookto_01242"
+      ],
+      "retrieved_distances": [
+        0.7983160018920898,
+        0.940667450428009,
+        0.9484759569168091,
+        0.9571126103401184,
+        0.9688746929168701
+      ],
+      "answer": "**Jumlah tugas pada bagian Writing tes TOEFL iBT:** **2**  \n\n**Nama kedua tugas tersebut:**\n\n| No. | Nama Tugas | Bukti dalam dokumen |\n|-----|------------|----------------------|\n| 1 | **Integrated Writing Task** | Disebutkan pada halaman 10 [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 10 ] |\n| 2 | **Independent Writing Task** | Disebutkan pada halaman 11 [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 11 ] |\n\nJadi, bagian Writing pada TOEFL iBT terdiri dari **Integrated Writing Task** (tugas menulis terintegrasi) dan **Independent Writing Task** (tugas menulis mandiri).\n\n---\n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 10 (Integrated Writing Task)  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 11 (Independent Writing Task)",
+      "cited_pages": [
+        10,
+        11
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 10,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 11,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 4.965,
+      "end_to_end_latency_seconds": 5.231,
+      "latency_seconds": 4.965,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_06",
+      "category": "factual",
+      "question": "Berapa jumlah kata yang disarankan untuk respons pada tugas Integrated Writing?",
+      "retrieved_pages": [
+        204,
+        214,
+        11,
+        10,
+        223
+      ],
+      "retrieved_chunks": [
+        "ebookto_01225",
+        "ebookto_01292",
+        "ebookto_00046",
+        "ebookto_00044",
+        "ebookto_01351"
+      ],
+      "retrieved_distances": [
+        0.7871248126029968,
+        0.8269451856613159,
+        0.8370736241340637,
+        0.8402494788169861,
+        0.8757110834121704
+      ],
+      "answer": "**Jawaban:**  \nInformasi mengenai jumlah kata yang disarankan untuk respons pada tugas Integrated Writing tidak terdapat dalam cuplikan konteks yang Anda berikan.\n\n📚 **Sumber:**  \nTidak ada referensi yang relevan dalam dokumen *eBook_TOEFL_Official_Guide_4e.pdf* pada halaman‑halaman yang disertakan (halaman 10, 11, 204, 214, 223).  \n\n---  \n\nJika Anda memiliki bagian lain dari *The Official Guide to the TOEFL Test* yang memuat pedoman panjang respons, silakan bagikan, dan saya akan membantu menafsirkannya!",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.022,
+      "generation_latency_seconds": 13.277,
+      "end_to_end_latency_seconds": 13.536,
+      "latency_seconds": 13.277,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_07",
+      "category": "factual",
+      "question": "Berapa skala penilaian mentah (raw rating scale) yang digunakan penilai ETS untuk menilai tugas Speaking?",
+      "retrieved_pages": [
+        204,
+        203,
+        214,
+        207,
+        35
+      ],
+      "retrieved_chunks": [
+        "ebookto_01225",
+        "ebookto_01219",
+        "ebookto_01292",
+        "ebookto_01247",
+        "ebookto_00151"
+      ],
+      "retrieved_distances": [
+        0.849065899848938,
+        0.9081873893737793,
+        0.9509203433990479,
+        0.9602696895599365,
+        1.0079894065856934
+      ],
+      "answer": "Penilai ETS memberi **nilai mentah (raw rating)** untuk setiap tugas Speaking pada **skala 0 – 4**. Setiap respons dinilai oleh beberapa rater bersertifikat, kemudian nilai‑nilai tersebut dirata‑rata dan dikonversi ke skor berskala 0‑30.\n\n**Sumber:**  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 35] – “The response for each task is rated on a scale from 0 to 4 …”  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 207] – “The scorers will evaluate … and assign ratings ranging from 0 to 4 for each response.”  \n\n📚 **Sumber:** eBook_TOEFL_Official_Guide_4e.pdf (halaman 35, 207)",
+      "cited_pages": [
+        35,
+        207
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 35,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 207,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 7.48,
+      "end_to_end_latency_seconds": 7.723,
+      "latency_seconds": 7.48,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.5,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_08",
+      "category": "factual",
+      "question": "Bagaimana sistem penilaian Writing section TOEFL iBT menurut buku panduan resmi?",
+      "retrieved_pages": [
+        214,
+        11,
+        223,
+        204,
+        36
+      ],
+      "retrieved_chunks": [
+        "ebookto_01292",
+        "ebookto_00047",
+        "ebookto_01351",
+        "ebookto_01225",
+        "ebookto_00155"
+      ],
+      "retrieved_distances": [
+        0.6283632516860962,
+        0.7176349759101868,
+        0.7666978240013123,
+        0.7720264196395874,
+        0.80718994140625
+      ],
+      "answer": "## Sistem Penilaian **Writing** pada TOEFL iBT (berdasarkan *The Official Guide to the TOEFL Test* 4th ed.)\n\n| Tahapan | Penjelasan | Sumber |\n|--------|------------|--------|\n| **1. Jumlah tugas** | Ada **dua** tugas menulis: <br>• **Integrated Writing Task** (menyimpulkan informasi dari bacaan + kuliah). <br>• **Independent Writing Task** (menulis esai pendapat). | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36] |\n| **2. Skor mentah tiap tugas** | Setiap tugas dinilai **0‑5** oleh **dua rater bersertifikat** serta **sistem otomatis** ETS. <br>Skor‑skor ini didasarkan pada rubrik yang spesifik untuk masing‑masing tugas (rubrik terletak pada halaman 200‑201 untuk Integrated, dan 209‑210 untuk Independent). | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36] |\n| **3. Penggabungan skor** | Nilai rata‑rata dari kedua tugas (Integrated + Independent) **dikonversi** menjadi **skor berskala 0‑30** yang muncul pada laporan skor TOEFL. | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36] |\n| **4. Rubrik penilaian – contoh skor 5** | **Integrated Writing (Hal 214)**  <br>• Memilih informasi penting dari kuliah, menyajikannya secara koheren & akurat bersamaan dengan informasi bacaan. <br>• Terorganisir dengan baik; kesalahan bahasa yang ada tidak mengganggu makna. | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 214] |\n| | **Independent Writing (Hal 223)**  <br>• Menjawab topik & tugas secara efektif. <br>• Terorganisir & berkembang baik, dengan penjelasan, contoh, atau detail yang tepat. <br>• Menunjukkan kesatuan, progresi, koherensi. <br>• Penggunaan bahasa konsisten, variasi sintaks, pilihan kata tepat, dan idiomatik (meski mungkin ada kesalahan leksikal/gramatik kecil). | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 223] |\n\n### Ringkasan alur penilaian\n1. **Pengumpulan jawaban** → dikirim ke ETS.  \n2. **Penilaian**: dua rater bersertifikat + sistem otomatis menilai tiap tugas dengan rubrik 0‑5.  \n3. **Penghitungan**: rata‑rata skor dua tugas → **skor akhir Writing 0‑30**.  \n\n> **Catatan:** Dokumen yang diberikan hanya memuat deskripsi rubrik untuk skor tertinggi (5) serta prosedur umum penilaian. Detail lengkap untuk skor 0‑4 tidak tercantum dalam konteks yang tersedia, sehingga tidak dapat disajikan di sini tanpa mengarang.\n\n---\n\n### 📚 Sumber\n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 36 – Penjelasan umum tentang proses penilaian dan konversi skor.  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 214 – Rubrik Integrated Writing (skor 5).  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 223 – Rubrik Independent Writing (skor 5).",
+      "cited_pages": [
+        36,
+        36,
+        36,
+        214,
+        223
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 36,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 36,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 36,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 214,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 223,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 15.17,
+      "end_to_end_latency_seconds": 15.431,
+      "latency_seconds": 15.17,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.6,
+      "citation_accuracy": 1.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_09",
+      "category": "factual",
+      "question": "Berapa kategori utama pertanyaan pada Listening section dan apa saja nama ketiga kategori tersebut?",
+      "retrieved_pages": [
+        140,
+        28,
+        10,
+        29,
+        140
+      ],
+      "retrieved_chunks": [
+        "ebookto_00842",
+        "ebookto_00118",
+        "ebookto_00038",
+        "pretest_04031",
+        "ebookto_00844"
+      ],
+      "retrieved_distances": [
+        0.8173432946205139,
+        0.8333693146705627,
+        0.8867732882499695,
+        0.9159375429153442,
+        0.9236342906951904
+      ],
+      "answer": "**Kategori utama pertanyaan pada Listening section**\n\nAda **tiga** kategori utama pertanyaan dalam bagian Listening:\n\n| No | Nama Kategori | Penjelasan singkat |\n|----|---------------|--------------------|\n| 1 | **Basic Comprehension questions** | Menguji pemahaman umum tentang isi, tujuan, atau detail spesifik dari kuliah atau percakapan. |\n| 2 | **Pragmatic Understanding questions** | Menguji pemahaman fungsi atau maksud yang tersirat dari apa yang dikatakan pembicara. |\n| 3 | **Connecting Information questions** | Menguji kemampuan menghubungkan informasi yang diberikan dalam bagian‑bagian berbeda dari materi listening. |\n\n**Sumber**\n\n- Daftar tiga kategori tersebut tercantum dalam bagian yang menjelaskan pembagian tipe‑tipe soal Listening menjadi tiga kategori — Basic Comprehension dan Pragmatic Understanding — [**eBook_TOEFL_Official_Guide_4e.pdf, Halaman 140**]【Konteks 1】.  \n- Nama kategori ketiga, **Connecting Information**, muncul dalam daftar isi bagian Listening pada dokumen resmi — [**eBook_TOEFL_Official_Guide_4e.pdf, Halaman 10**]【Konteks 3】.  \n\n\n\n📚 **Sumber:** eBook_TOEFL_Official_Guide_4e.pdf (halaman 140, 10)",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.022,
+      "generation_latency_seconds": 15.105,
+      "end_to_end_latency_seconds": 15.355,
+      "latency_seconds": 15.105,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "fact_10",
+      "category": "factual",
+      "question": "Apa dua jenis pertanyaan Reading to Learn yang ada pada Reading section TOEFL iBT?",
+      "retrieved_pages": [
+        23,
+        23,
+        52,
+        51,
+        25
+      ],
+      "retrieved_chunks": [
+        "ebookto_00102",
+        "ebookto_00103",
+        "ebookto_00232",
+        "ebookto_00227",
+        "ebookto_00108"
+      ],
+      "retrieved_distances": [
+        0.7776831388473511,
+        0.7852025032043457,
+        0.8213493227958679,
+        0.8263269662857056,
+        0.852484405040741
+      ],
+      "answer": "**Dua jenis pertanyaan “Reading to Learn” pada bagian Reading TOEFL iBT adalah:**\n\n| Jenis pertanyaan | Deskripsi singkat |\n|------------------|-------------------|\n| **Summary** | Menanyakan inti atau rangkuman informasi utama dari satu atau beberapa paragraf. |\n| **Category Chart** | Meminta kamu mengelompokkan informasi ke dalam tabel atau diagram kategori yang diberikan. |\n\nKedua tipe ini termasuk dalam kelompok “Reading to Learn” yang menguji kemampuan memahami dan mengorganisir informasi secara mendalam — bukan sekadar menemukan fakta tunggal.  \n\n📚 **Sumber:**  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 25 – menampilkan contoh “Reading to Learn—Summary Question” dan “Reading to Learn—Category Chart Question”.",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.021,
+      "generation_latency_seconds": 14.09,
+      "end_to_end_latency_seconds": 14.327,
+      "latency_seconds": 14.09,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_01",
+      "category": "conceptual",
+      "question": "Apa perbedaan mendasar antara pertanyaan Factual Information dan Negative Factual Information pada Reading section?",
+      "retrieved_pages": [
+        54,
+        52,
+        21,
+        54,
+        52
+      ],
+      "retrieved_chunks": [
+        "ebookto_00248",
+        "ebookto_00236",
+        "ebookto_00095",
+        "ebookto_00246",
+        "ebookto_00235"
+      ],
+      "retrieved_distances": [
+        0.8569166660308838,
+        0.9081475138664246,
+        0.9119799137115479,
+        0.9163191318511963,
+        0.9370057582855225
+      ],
+      "answer": "",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 10.764,
+      "end_to_end_latency_seconds": 11.004,
+      "latency_seconds": 10.764,
+      "error": "GENERATION_FAILED: detail provider dihapus untuk publikasi.",
+      "status": "GENERATION_FAILED",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.8,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_02",
+      "category": "conceptual",
+      "question": "Apa perbedaan utama antara tugas Independent Speaking dan Integrated Speaking pada TOEFL iBT?",
+      "retrieved_pages": [
+        207,
+        204,
+        202,
+        43,
+        179
+      ],
+      "retrieved_chunks": [
+        "ebookto_01242",
+        "ebookto_01225",
+        "ebookto_01208",
+        "ebookto_00186",
+        "ebookto_01064"
+      ],
+      "retrieved_distances": [
+        0.7339373826980591,
+        0.7877834439277649,
+        0.8446440100669861,
+        0.8638740181922913,
+        0.867300808429718
+      ],
+      "answer": "## Perbedaan Utama antara **Independent Speaking** dan **Integrated Speaking** pada TOEFL iBT\n\n| Aspek | Independent Speaking | Integrated Speaking |\n|-------|----------------------|----------------------|\n| **Sumber materi** | Mengandalkan **ide‑ide, pendapat, dan pengalaman pribadi** peserta tes. Tidak ada teks atau rekaman yang harus diproses terlebih dahulu. | Mengharuskan peserta **menggabungkan informasi** yang diberikan melalui **bacaan (reading passage)**, **dialog/percakapan**, atau **kuliah (lecture)** sebelum menjawab secara lisan. |\n| **Jumlah pertanyaan dalam satu sesi Speaking** | 2 pertanyaan (pertanyaan 1 & 2). | 4 pertanyaan (pertanyaan 3, 4, 5, & 6). |\n| **Tujuan kemampuan yang diuji** | Menilai kemampuan **menyampaikan pendapat pribadi secara jelas dan terstruktur** tanpa bantuan materi eksternal. | Menilai kemampuan **mengintegrasikan keterampilan membaca, mendengarkan, dan berbicara**—yaitu mengolah informasi yang diberikan, menyusunnya, lalu menyampaikannya secara lisan. |\n| **Contoh tipe tugas** | “Describe a memorable event in your life.” – peserta harus **menarik dari pengalaman sendiri**. | “Read a short passage, listen to a lecture, then summarize the main points and explain how they relate.” – peserta harus **menyintesis informasi dari teks dan audio** sebelum berbicara. |\n| **Kaitan dengan konteks akademik** | Menunjukkan kemampuan **berpikir kritis dan mengekspresikan ide pribadi** dalam bahasa Inggris. | Menunjukkan kemampuan **menggunakan semua keterampilan bahasa (reading, listening, speaking, writing)** secara terpadu, yang penting untuk studi di perguruan tinggi berbahasa Inggris. |\n\n### Rujukan dari dokumen resmi\n- **Independent Speaking**: “The first two questions are called Independent Speaking tasks because they require you to draw entirely on your own ideas, opinions, and experiences when responding.” [**eBook_TOEFL_Official_Guide_4e.pdf**, Halaman 179]  \n- **Integrated Speaking**: “Speaking tasks that combine reading passages and/or dialogues or lectures with speaking are called integrated tasks.” [**eBook_TOEFL_Official_Guide_4e.pdf**, Halaman 207]  \n- Jumlah pertanyaan: “There are six questions. The first two questions are called Independent Speaking tasks… The other four questions are Integrated Speaking tasks.” [**eBook_TOEFL_Official_Guide_4e.pdf**, Halaman 179]  \n- Tujuan akademik: “students need to be able to combine all their English language skills—in reading, listening, and speaking, as well as writing—inside and outside the class.” [**eBook_TOEFL_Official_Guide_4e.pdf**, Halaman 207]  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 179, 207.  \n\nSemoga penjelasan ini membantu kamu memahami perbedaan kedua tipe tugas Speaking! Jika ingin contoh soal atau strategi khusus untuk masing‑masing tipe, beri tahu ya. 🚀",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.022,
+      "generation_latency_seconds": 2.939,
+      "end_to_end_latency_seconds": 3.199,
+      "latency_seconds": 2.939,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_03",
+      "category": "conceptual",
+      "question": "Apa tiga kriteria utama yang didengarkan oleh penilai (raters) saat mengevaluasi respons Speaking?",
+      "retrieved_pages": [
+        182,
+        448,
+        563,
+        335,
+        354
+      ],
+      "retrieved_chunks": [
+        "ebookto_01087",
+        "ebookto_02614",
+        "ebookto_03283",
+        "ebookto_01977",
+        "ebookto_02110"
+      ],
+      "retrieved_distances": [
+        1.064473271369934,
+        1.1113696098327637,
+        1.111674189567566,
+        1.123380422592163,
+        1.1508311033248901
+      ],
+      "answer": "**Tiga kriteria utama yang dinilai oleh penilai (raters) saat mengevaluasi respons Speaking TOEFL iBT adalah:**\n\n1. **Delivery** – cara Anda menyampaikan jawaban, termasuk kejelasan pengucapan, intonasi, kecepatan, dan kelancaran berbicara.  \n2. **Language Use** – penggunaan tata bahasa, kosakata, serta variasi struktur kalimat yang tepat dan akurat.  \n3. **Topic Development** – kemampuan Anda mengembangkan ide, memberikan alasan, contoh, dan detail yang relevan serta menjaga fokus pada topik yang diminta.  \n\nSemua tiga kategori memiliki bobot yang sama dalam penilaian.  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 448 [​eBook_TOEFL_Official_Guide_4e.pdf, Halaman 448]  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 563 [​eBook_TOEFL_Official_Guide_4e.pdf, Halaman 563]  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 335 [​eBook_TOEFL_Official_Guide_4e.pdf, Halaman 335]",
+      "cited_pages": [
+        448,
+        563,
+        335
+      ],
+      "citations": [
+        {
+          "source": "​eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 448,
+          "in_retrieved_context": false
+        },
+        {
+          "source": "​eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 563,
+          "in_retrieved_context": false
+        },
+        {
+          "source": "​eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 335,
+          "in_retrieved_context": false
+        }
+      ],
+      "retrieval_latency_seconds": 0.023,
+      "generation_latency_seconds": 19.603,
+      "end_to_end_latency_seconds": 19.859,
+      "latency_seconds": 19.603,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_04",
+      "category": "conceptual",
+      "question": "Mengapa menghafal respons sebelum tes (memorized responses) dilarang dan dapat merugikan skor pada Speaking section?",
+      "retrieved_pages": [
+        215,
+        214,
+        204,
+        205,
+        202
+      ],
+      "retrieved_chunks": [
+        "ebookto_01298",
+        "ebookto_01292",
+        "ebookto_01225",
+        "ebookto_01227",
+        "ebookto_01208"
+      ],
+      "retrieved_distances": [
+        0.7652201056480408,
+        0.7767125368118286,
+        0.8043718338012695,
+        0.8380476832389832,
+        0.8408812880516052
+      ],
+      "answer": "**Mengapa menghafal respons sebelum tes (memorized responses) dilarang dan dapat merugikan skor pada Speaking section?**  \n\n| Alasan | Penjelasan | Hubungan dengan Rubrik Scoring |\n|--------|------------|--------------------------------|\n| 1. **Kurang keterkaitan dan kelengkapan** | Jawaban yang dihafal biasanya dibuat sebelumnya dan tidak menyesuaikan dengan topik atau detail spesifik yang diberikan pada saat tes. Akibatnya, respons dapat **hilang informasi relevan** atau **menyajikan fakta yang tidak tepat**. | Pada rubrik Integrated Speaking (Pertanyaan 3‑6) disebutkan bahwa “The response is connected to the task, though it may be missing some relevant information or contain inaccuracies” — penilaian menurunkan skor bila ada **kekurangan informasi** atau **ketidaktepatan** [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 205 ]. |\n| 2. **Masalah kejelasan dan kelancaran** | Menggunakan skrip yang dihafal dapat membuat **intonasi terdengar kaku**, **penekanan kata tidak natural**, dan **kesulitan dalam alur bicara**. Hal ini dapat menurunkan **intelligibility** (keterpahaman) dan **coherence** (koherensi) yang sangat penting dalam penilaian. | Rubrik Independent Speaking (Pertanyaan 1‑2) menekankan bahwa “The response fulfills the demands of the task… It is highly intelligible and exhibits sustained, coherent discourse” — penilaian tinggi diberikan bila **bicara jelas, alur lancar, dan koheren** [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 202 ]. |\n| 3. **Penggunaan bahasa yang tidak spontan** | Tes TOEFL menilai kemampuan **berpikir dan merespons secara spontan** dalam bahasa Inggris. Jawaban yang dihafal tidak menunjukkan kemampuan ini, sehingga **rater dapat menilai bahwa kemampuan bahasa sebenarnya tidak tercermin**. | Pada rubrik Integrated Speaking, “The response is connected to the task… It contains some intelligible speech, but at times problems with intelligibility and/or overall coherence may obscure meaning” — penilaian menurun bila **keterpahaman atau koherensi terganggu** [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 205 ]. |\n| 4. **Risiko “misrepresent” atau “omit” hubungan antara materi** | Jika skrip tidak mencerminkan hubungan yang tepat antara bacaan dan kuliah (untuk Integrated Tasks), rater dapat menilai **misrepresentasi** atau **penghilangan** hubungan penting, yang secara eksplisit menurunkan skor pada level 2‑3. | Pada rubrik Integrated Writing (sebagai analogi) disebutkan bahwa “The response significantly misrepresents or completely omits the overall connection between the lecture and the reading” — meski ini untuk menulis, prinsip yang sama berlaku untuk speaking karena **koneksi yang tepat** sangat penting [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 215 ]. |\n\n### Ringkasan\n- **Memorized responses** cenderung **kurang relevan, tidak akurat, kurang alami, dan tidak menunjukkan kemampuan berpikir spontan**.  \n- Semua hal tersebut bertentangan dengan kriteria penilaian pada rubrik Speaking (both Independent and Integrated), yang menilai **keterkaitan dengan tugas, kelengkapan informasi, kejelasan, kelancaran, dan koherensi**.  \n- Karena rater menilai berdasarkan kriteria tersebut, penggunaan skrip yang dihafal **bisa menurunkan skor** secara signifikan.\n\n---\n\n📚 **Sumber:**  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 205 – Integrated Speaking Scoring Rubric.  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 202 – Independent Speaking Scoring Rubric.  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 215 – Integrated Writing (menunjukkan konsekuensi misrepresentasi/omisi yang relevan).  \n\n> **Catatan:** Dokumen yang diberikan tidak secara eksplisit menyebutkan larangan “memorized responses”. Penjelasan di atas disusun dengan mengaitkan kriteria penilaian yang ada dalam rubrik resmi, yang secara tidak langsung menjelaskan mengapa penggunaan jawaban yang dihafal dapat merugikan skor.",
+      "cited_pages": [
+        205,
+        202,
+        205,
+        215
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 205,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 202,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 205,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 215,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.024,
+      "generation_latency_seconds": 11.192,
+      "end_to_end_latency_seconds": 11.444,
+      "latency_seconds": 11.192,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_05",
+      "category": "conceptual",
+      "question": "Bagaimana perbedaan alur kerja antara tugas Integrated Writing dan Independent Writing?",
+      "retrieved_pages": [
+        36,
+        223,
+        45,
+        214,
+        33
+      ],
+      "retrieved_chunks": [
+        "ebookto_00156",
+        "ebookto_01351",
+        "ebookto_00201",
+        "ebookto_01292",
+        "ebookto_00137"
+      ],
+      "retrieved_distances": [
+        0.7334302067756653,
+        0.7419736981391907,
+        0.7661678791046143,
+        0.8023545145988464,
+        0.8413928747177124
+      ],
+      "answer": "## Perbedaan Alur Kerja antara **Integrated Writing** dan **Independent Writing**\n\nBerikut rangkaian langkah‑langkah yang biasanya dilakukan test taker untuk masing‑masing tugas menulis pada TOEFL iBT, berdasarkan informasi yang terdapat dalam *The Official Guide to the TOEFL Test* (edisi ke‑4).\n\n| Tahap | Integrated Writing | Independent Writing |\n|-------|-------------------|----------------------|\n| **1. Membaca dan Mendengarkan** | • Membaca **passage** (biasanya 250‑300 kata) yang berisi argumen atau informasi akademik.<br>• Mendengarkan **lecture** (sekitar 2‑3 menit) yang menanggapi atau melengkapi passage tersebut.<br>*(Tidak ada detail spesifik dalam konteks yang diberikan, namun ini merupakan langkah awal yang selalu ada pada Integrated Writing.)* | • Tidak ada bahan bacaan atau audio. Test taker langsung menerima **prompt** yang meminta pendapat atau preferensi pribadi tentang suatu topik. |\n| **2. Memahami Tugas** | • Menentukan informasi penting yang harus disampaikan: apa yang dibaca, apa yang didengar, dan bagaimana keduanya berhubungan.<br>• Fokus pada **seleksi informasi** yang relevan dari lecture dan hubungannya dengan reading. | • Menentukan **topik**, **opini/prefensi**, serta **argumen pendukung** yang akan ditulis. |\n| **3. Perencanaan (Pre‑writing)** | • Membuat catatan singkat tentang poin‑poin utama dari reading dan lecture.<br>• Menyusun kerangka yang menghubungkan kedua sumber (mis. “Reading says X; Lecture says Y, which contradicts X”). | • Membuat daftar **ide‑ide** terkait topik, memilih satu **gagasan utama**, dan menuliskan **poin‑poin pendukung** (pre‑writing).<br>• Disarankan menghabiskan sekitar 30 menit untuk **plan → write → revise** setiap esai. [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 45] |\n| **4. Penulisan** | • Menulis **essay** yang mengintegrasikan informasi: menyajikan ringkasan reading, kemudian menjelaskan bagaimana lecture menambah, menolak, atau memperluas informasi tersebut.<br>• Menjaga **koherensi** antara dua sumber. | • Menulis **essay** yang mengekspresikan opini pribadi, mengembangkan argumen dengan contoh, penjelasan, atau bukti yang relevan.<br>• Fokus pada **development, organization, dan penggunaan grammar & vocabulary** yang tepat. [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36] |\n| **5. Penilaian (Rubrik)** | • Penilai menilai seberapa **efektif** respon meng‑select informasi penting dari lecture, menghubungkannya dengan reading, serta **keakuratan** dan **koherensi** penyajiannya.<br>• Skor 5 menandakan respons “successfully selects the important information … and coherently presents it.” [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 214] | • Penilai menilai **development, organization, dan penggunaan bahasa** (grammar & vocabulary). Skor 5 menandakan esai “effectively addresses the topic, is well organized and well developed, and displays consistent facility in language use.” [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 223] |\n| **6. Revisi (Jika Waktu)** | • Karena waktu terbatas (≈20 menit), biasanya tidak ada waktu khusus untuk revisi; penulis diharapkan menulis dengan **ketelitian** sejak awal. | • Disarankan mengalokasikan **waktu revisi** dalam 30‑menit total (plan‑write‑revise). [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 45] |\n\n### Ringkasan Utama\n- **Integrated Writing**: melibatkan **dua sumber** (reading + lecture), menuntut **seleksi** dan **integrasi** informasi, serta menilai kemampuan menghubungkan dua perspektif akademik.  \n- **Independent Writing**: hanya mengandalkan **pendapat pribadi** terhadap satu topik, menekankan **pengembangan argumen**, **organisasi**, serta **ketepatan bahasa**.\n\n> **Catatan:** Dokumen yang diberikan tidak memuat detail langkah‑langkah spesifik pada fase *membaca & mendengarkan* untuk Integrated Writing, sehingga penjelasan tersebut bersifat umum berdasarkan pengetahuan standar TOEFL.\n\n---\n\n### 📚 Sumber\n- *eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36* – Penjelasan tentang kualitas penilaian Independent Writing.  \n- *eBook_TOEFL_Official_Guide_4e.pdf, Halaman 45* – Panduan pre‑writing dan alokasi waktu untuk Independent Writing.  \n- *eBook_TOEFL_Official_Guide_4e.pdf, Halaman 223* – Rubrik penilaian Independent Writing (skor 5).  \n- *eBook_TOEFL_Official_Guide_4e.pdf, Halaman 214* – Rubrik penilaian Integrated Writing (skor 5).  ",
+      "cited_pages": [
+        45,
+        36,
+        214,
+        223,
+        45
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 45,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 36,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 214,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 223,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 45,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.022,
+      "generation_latency_seconds": 23.729,
+      "end_to_end_latency_seconds": 23.978,
+      "latency_seconds": 23.729,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_06",
+      "category": "conceptual",
+      "question": "Apa ciri-ciri respons yang mendapatkan skor tertinggi (Skor 5) pada rubrik Independent Writing?",
+      "retrieved_pages": [
+        214,
+        36,
+        223,
+        11,
+        11
+      ],
+      "retrieved_chunks": [
+        "ebookto_01292",
+        "ebookto_00156",
+        "ebookto_01351",
+        "ebookto_00046",
+        "ebookto_00047"
+      ],
+      "retrieved_distances": [
+        0.6247032880783081,
+        0.6991937160491943,
+        0.7263587713241577,
+        0.7655983567237854,
+        0.7879204750061035
+      ],
+      "answer": "**Ciri‑ciri respons Independent Writing yang memperoleh skor tertinggi (Skor 5)**  \n\nBerdasarkan rubrik penilaian resmi TOEFL (The Official Guide, 4th ed.), sebuah esai independen akan mendapatkan skor 5 bila memenuhi semua poin berikut:\n\n| Aspek | Deskripsi |\n|-------|-----------|\n| **Pemenuhan tugas** | Menjawab topik dan tugas secara **efektif**; tidak ada bagian yang terlewat atau tidak relevan. |\n| **Organisasi & pengembangan** | Esai **terstruktur dengan baik** (pengenalan, paragraf‑paragraf pendukung, kesimpulan) dan **dikembangkan secara mendalam** dengan penjelasan, contoh, atau detail yang jelas dan relevan. |\n| **Kohesi & koherensi** | Menunjukkan **kesatuan (unity)**, **kemajuan logis (progression)**, dan **koherensi** antar‑paragraf serta antar‑kalimat, sehingga pembaca dapat mengikuti alur pemikiran dengan mudah. |\n| **Penggunaan bahasa** | Menampilkan **kemampuan bahasa yang konsisten**, termasuk: <br>• **Variasi sintaksis** (beragam struktur kalimat) <br>• **Pemilihan kata yang tepat** (vocabulary yang sesuai konteks) <br>• **Idiomaticity** (penggunaan ungkapan alami) <br>Walaupun mungkin terdapat **kesalahan leksikal atau tata bahasa minor**, kesalahan tersebut tidak mengganggu pemahaman. |\n| **Kualitas keseluruhan** | Secara keseluruhan, esai menunjukkan **kualitas menulis yang tinggi** dalam hal pengembangan ide, organisasi, serta penggunaan tata bahasa dan kosakata yang tepat dan presisi. (Catatan: penilai menganggap esai sebagai *draft* pertama, sehingga tidak diharapkan menjadi karya yang sangat riset atau komprehensif.) |\n\n**Ringkasan poin utama**  \n- Jawaban lengkap dan relevan dengan topik.  \n- Struktur logis dan terorganisir dengan baik.  \n- Ide‑ide terhubung secara koheren, dengan alur yang jelas.  \n- Bahasa yang variatif, tepat, dan hampir bebas dari kesalahan yang mengganggu.\n\n📚 **Sumber:**  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 223] – Rubrik Skor 5 untuk Independent Writing.  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 36] – Penjelasan umum tentang kualitas menulis yang dinilai (organisasi, tata bahasa, kosakata).",
+      "cited_pages": [
+        223,
+        36
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 223,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 36,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.027,
+      "generation_latency_seconds": 12.612,
+      "end_to_end_latency_seconds": 12.917,
+      "latency_seconds": 12.612,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.5,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_07",
+      "category": "conceptual",
+      "question": "Apa perbedaan konteks komunikasi antara Service Encounters dan Academic Lectures pada Listening section?",
+      "retrieved_pages": [
+        138,
+        26,
+        137,
+        654,
+        140
+      ],
+      "retrieved_chunks": [
+        "ebookto_00831",
+        "ebookto_00109",
+        "ebookto_00829",
+        "ebookto_03842",
+        "ebookto_00842"
+      ],
+      "retrieved_distances": [
+        0.6220095157623291,
+        0.871799886226654,
+        0.8969552516937256,
+        0.9131912589073181,
+        0.9143717288970947
+      ],
+      "answer": "## Perbedaan Konteks Komunikasi antara **Service Encounters** dan **Academic Lectures** pada Listening Section\n\n| Aspek | Service Encounters | Academic Lectures |\n|-------|-------------------|-------------------|\n| **Jenis Konten** | Interaksi **non‑academic** yang berhubungan dengan urusan administratif atau layanan kampus (misalnya menanyakan pembayaran rumah tinggal, mendaftar kelas, atau meminta perpanjangan deadline). | Konten **academic** yang mencerminkan cara profesor mengajar di kelas, biasanya berupa penjelasan materi kuliah. |\n| **Tempat / Situasi** | Terjadi di lingkungan kampus di luar ruang kelas (misalnya kantor administrasi, loket layanan). | Terjadi dalam **ruang kuliah** atau situasi pembelajaran formal. |\n| **Pembicara** | Biasanya melibatkan staf layanan kampus, petugas administrasi, atau mahasiswa yang meminta bantuan. | Pembicara utama adalah **profesor**; kadang ada interaksi singkat dengan mahasiswa (misalnya pertanyaan). |\n| **Tujuan Komunikasi** | Menyelesaikan urusan praktis, memperoleh informasi prosedural, atau menyelesaikan masalah logistik. | Menyampaikan **materi akademik**, membantu mahasiswa memahami konsep, ide, atau data ilmiah. |\n| **Jenis Pertanyaan TOEFL** | Setiap percakapan diikuti oleh **lima pertanyaan** yang menguji pemahaman detail, fungsi, atau tujuan percakapan. | Setiap kuliah (lecture excerpt) juga diikuti oleh **lima pertanyaan**, namun fokus pada pemahaman isi akademik, gagasan utama, dan detail penting. |\n| **Contoh Isi** | “Bagaimana cara membayar biaya asrama?” atau “Saya ingin memperpanjang batas waktu pengumpulan tugas.” | “Profesor menjelaskan proses fotosintesis” atau “Peneliti membahas hasil eksperimen terbaru.” |\n\n### Ringkasan\n- **Service Encounters** menekankan **komunikasi praktis** dengan **konten non‑academic**, sedangkan **Academic Lectures** menekankan **komunikasi akademik** dengan **konten pembelajaran**.  \n- Kedua tipe ini muncul dalam Listening section dan masing‑masing diikuti oleh lima pertanyaan, tetapi **fokus soal** berbeda: layanan vs materi kuliah.  \n\n**Sumber yang mendukung**  \n- Definisi Service Encounters dan Academic Lectures serta contoh kontennya: [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 138]  \n- Penjelasan bahwa Service Encounters berisi interaksi non‑academic (misalnya pembayaran rumah tinggal, pendaftaran kelas) dan bahwa Lectures mewakili bahasa yang digunakan profesor di kelas: [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 138]  \n- Informasi bahwa setiap percakapan atau kuliah diikuti oleh lima pertanyaan: [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 138]  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 138.  \n\n*Jika ada aspek lain yang ingin Anda gali lebih dalam (misalnya strategi menjawab pertanyaan tipe tertentu), beri tahu saya! Saya siap membantu.*",
+      "cited_pages": [
+        138,
+        138,
+        138
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 138,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 138,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 138,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.025,
+      "generation_latency_seconds": 19.688,
+      "end_to_end_latency_seconds": 19.976,
+      "latency_seconds": 19.688,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 1.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_08",
+      "category": "conceptual",
+      "question": "Apa yang diuji oleh pertanyaan Pragmatic Understanding pada Listening section?",
+      "retrieved_pages": [
+        146,
+        140,
+        28,
+        29,
+        140
+      ],
+      "retrieved_chunks": [
+        "ebookto_00877",
+        "ebookto_00842",
+        "ebookto_00118",
+        "pretest_04031",
+        "ebookto_00844"
+      ],
+      "retrieved_distances": [
+        0.6644996404647827,
+        0.7094857096672058,
+        0.799608588218689,
+        0.809624969959259,
+        0.819431722164154
+      ],
+      "answer": "**Jawaban**\n\nPertanyaan **Pragmatic Understanding** pada bagian Listening menguji kemampuan Anda untuk memahami hal‑hal yang berada di luar makna literal kata‑kata yang didengar. Secara khusus, jenis pertanyaan ini menilai:\n\n- **Fungsi ujaran** – bagaimana suatu pernyataan atau kalimat berfungsi dalam konteks percakapan (misalnya memberi saran, menyatakan keberatan, meminta klarifikasi, dsb.).  \n- **Sikap atau attitude pembicara** – nada, tujuan, atau perasaan yang ingin disampaikan pembicara, yang tidak selalu diungkapkan secara eksplisit.  \n\nDengan kata lain, pertanyaan ini menilai sejauh mana Anda dapat menangkap **tujuan, fungsi, dan sikap** pembicara dalam percakapan atau kuliah, bukan sekadar isi faktual atau ide pokoknya.  \n\n**Referensi**  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 146] – menjelaskan bahwa Pragmatic Understanding questions “test understanding of certain features of spoken English that go beyond basic comprehension… how well you understand the function of an utterance or the stance, or attitude, that the speaker expresses.”  \n- [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 140] – menegaskan bahwa tipe pertanyaan ini termasuk dalam kategori Pragmatic Understanding dan berfokus pada “Understanding the Function of What Is Said” serta “Understanding the Speaker’s Attitude.”  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 146  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 140",
+      "cited_pages": [
+        146,
+        140
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 146,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 140,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.051,
+      "generation_latency_seconds": 6.641,
+      "end_to_end_latency_seconds": 6.965,
+      "latency_seconds": 6.641,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "citation_accuracy": 0.5,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_09",
+      "category": "conceptual",
+      "question": "Apa ketentuan mengenai pembuatan catatan (note-taking) selama tes TOEFL iBT menurut buku resmi?",
+      "retrieved_pages": [
+        665,
+        41,
+        33,
+        405,
+        291
+      ],
+      "retrieved_chunks": [
+        "ebookto_03896",
+        "ebookto_00175",
+        "ebookto_00138",
+        "ebookto_02353",
+        "ebookto_01721"
+      ],
+      "retrieved_distances": [
+        0.7708543539047241,
+        0.9237655401229858,
+        0.9451047778129578,
+        0.9709420204162598,
+        0.9783828258514404
+      ],
+      "answer": "**Ketentuan catatan (note‑taking) selama tes TOEFL iBT**  \nBerdasarkan *The Official Guide to the TOEFL Test* (edisi 4), buku resmi memberikan panduan strategi catatan, bukan larangan. Berikut poin‑poin utama yang disebutkan:\n\n| Bagian tes | Apa yang boleh/harus dilakukan saat mencatat | Sumber |\n|------------|----------------------------------------------|--------|\n| **Integrated Writing** (menulis gabungan membaca + mendengarkan) | • Ambil catatan **dalam bahasa Anda terlebih dahulu**, kemudian ubah ke bahasa Inggris. <br>• Ringkas poin‑poin dalam kalimat lengkap berbahasa Inggris. <br>• Secara bertahap kurangi waktu yang diperlukan untuk membaca materi dan menulis ringkasan. <br>• Latih mengetik pada keyboard QWERTY standar. | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 665] |\n| **Listening (bagian Listening & Integrated Writing)** | • Tuliskan **“important points”** dan **“important details”** pada baris‑baris terpisah saat mendengarkan. <br>• Dengarkan sampai semua poin penting tercatat, lalu tinjau kembali catatan. <br>• Buat **outline** (kerangka) dari poin‑poin penting, lalu gunakan outline untuk menulis ringkasan singkat. <br>• Tingkatkan secara bertahap panjang materi yang Anda rangkum. | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 41] |\n| **Integrated Writing (penjelasan umum)** | • Catat apa yang Anda dengar **dan** apa yang Anda baca, kemudian gunakan catatan tersebut untuk: <br> 1. Mengorganisir informasi, <br> 2. Menyimpulkan, memparafrase, dan mengutip secara akurat, <br> 3. Menjelaskan hubungan antara informasi yang didengar dan yang dibaca. | [eBook_TOEFL_Official_Guide_4e.pdf, Halaman 33] |\n\n### Ringkasan\n- **Anda diperbolehkan** menulis catatan pada kertas yang disediakan selama bagian Listening dan Integrated Writing.  \n- Buku resmi **menyarankan** mencatat dalam bahasa pertama terlebih dahulu, lalu menerjemahkannya ke bahasa Inggris, serta membuat outline untuk membantu menulis ringkasan.  \n- Fokus catatan harus pada **poin‑penting** dan **detail penting** yang akan Anda gunakan untuk menjawab pertanyaan atau menulis esai terintegrasi.  \n\n> **Catatan:** Panduan di atas bersifat strategi belajar; tidak ada larangan khusus tentang jenis catatan yang boleh dibuat selama tes, selama catatan ditulis pada lembar kerja yang diberikan oleh ETS.\n\n---\n\n📚 **Sumber**  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 665  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 41  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 33  ",
+      "cited_pages": [
+        665,
+        41,
+        33
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 665,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 41,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 33,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.027,
+      "generation_latency_seconds": 17.555,
+      "end_to_end_latency_seconds": 17.858,
+      "latency_seconds": 17.555,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "concept_10",
+      "category": "conceptual",
+      "question": "Bagaimana strategi umum yang disarankan untuk menghadapi pertanyaan Prose Summary pada Reading section?",
+      "retrieved_pages": [
+        23,
+        204,
+        52,
+        23,
+        68
+      ],
+      "retrieved_chunks": [
+        "ebookto_00103",
+        "ebookto_01225",
+        "ebookto_00234",
+        "ebookto_00104",
+        "ebookto_00357"
+      ],
+      "retrieved_distances": [
+        0.8804911375045776,
+        0.8862361907958984,
+        0.928634524345398,
+        0.9408520460128784,
+        0.9474490880966187
+      ],
+      "answer": "**Strategi umum untuk menjawab pertanyaan *Prose Summary* pada bagian Reading**\n\nBerikut langkah‑langkah yang dapat kamu terapkan, dirangkum dari penjelasan dalam *The Official Guide to the TOEFL Test* (edisi ke‑4):\n\n| Langkah | Apa yang harus dilakukan | Mengapa langkah ini penting |\n|--------|--------------------------|-----------------------------|\n| **1. Baca cepat (skim) seluruh passage** | Fokus pada judul, paragraf pertama & terakhir, serta kata‑kunci (mis. “however”, “therefore”, “in contrast”). | Membantu kamu menangkap **gambaran umum** dan struktur teks sebelum masuk ke detail. |\n| **2. Identifikasi ide‑ide utama tiap paragraf** | Catat satu‑dua kalimat inti (topic sentence) atau fakta penting yang disampaikan. | *Prose Summary* menilai kemampuan **mengkonseptualisasikan dan mengorganisasi ide‑ide utama** dari seluruh passage [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 68 ]. |\n| **3. Buat kerangka mental (mental framework)** | Hubungkan ide‑ide utama tersebut menjadi sebuah rangkaian logis: apa masalahnya, apa solusi/penjelasannya, dan apa kesimpulannya. | Membantu menempatkan setiap poin pada **konteks yang tepat** sehingga kamu tidak melewatkan hubungan antar‑ide [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 68 ]. |\n| **4. Perhatikan hubungan antar‑paragraf** | Catat kata‑hubung (cause‑effect, contrast, comparison) yang menunjukkan **hubungan fakta dan ide** di seluruh teks. | Pertanyaan *Prose Summary* menguji kemampuan **menyadari cara organisasi passage** [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 23 ]. |\n| **5. Pilih jawaban yang mencakup semua ide utama** | Saat melihat pilihan jawaban, pastikan **setiap ide utama** yang kamu temukan tercakup, dan tidak ada informasi yang tidak disebutkan dalam teks. | Soal ini memberi **nilai hingga 2 poin**; jawaban yang lengkap akan memperoleh poin penuh [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 23 ]. |\n| **6. Hindari detail yang terlalu spesifik** | Ringkasan harus **menyampaikan inti** tanpa menambahkan contoh, data, atau kutipan verbatim. | Detail berlebih dapat membuat jawaban **tidak tepat** karena ringkasan harus bersifat umum. |\n| **7. Periksa kembali** | Setelah memilih, bandingkan kembali ringkasan pilihan dengan catatan ide utama untuk memastikan tidak ada yang terlewat. | Meminimalkan risiko **kesalahan karena lupa** satu poin penting. |\n\n### Ringkasan singkat\n- **Baca cepat** untuk memahami struktur keseluruhan.  \n- **Catat ide utama** tiap paragraf dan buat **kerangka mental**.  \n- Perhatikan **kata‑hubung** yang menandakan hubungan logis.  \n- Pilih jawaban yang **menyertakan semua ide utama** tanpa menambah detail yang tidak ada di teks.  \n\n📚 **Sumber:**  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 23 – penjelasan tentang fitur “Reading to Learn” dan pentingnya mengorganisasi fakta‑ide.  \n- *eBook_TOEFL_Official_Guide_4e.pdf*, Halaman 68 – deskripsi tentang cara mengkonseptualisasikan dan mengorganisasi ide utama untuk *Prose Summary*.  ",
+      "cited_pages": [
+        68,
+        68,
+        23,
+        23
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 68,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 68,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 23,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 23,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.027,
+      "generation_latency_seconds": 14.685,
+      "end_to_end_latency_seconds": 14.982,
+      "latency_seconds": 14.685,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "cite_01",
+      "category": "retrieval_citation",
+      "question": "Berapa menit waktu yang diberikan untuk membaca bacaan pada tugas Integrated Writing sebelum audio diputar?",
+      "retrieved_pages": [
+        291,
+        405,
+        519,
+        204,
+        207
+      ],
+      "retrieved_chunks": [
+        "ebookto_01721",
+        "ebookto_02353",
+        "ebookto_03013",
+        "ebookto_01225",
+        "ebookto_01242"
+      ],
+      "retrieved_distances": [
+        0.7328237295150757,
+        0.7374871373176575,
+        0.7399109601974487,
+        0.8413518071174622,
+        0.8762292265892029
+      ],
+      "answer": "**Jawaban:**  \nInformasi mengenai berapa menit waktu yang diberikan untuk membaca bacaan pada tugas Integrated Writing sebelum audio diputar **tidak terdapat dalam konteks yang disediakan**.\n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 291, 405, 519, 204, 207 (tidak mencakup detail waktu membaca).  \n\nJika Anda memiliki bagian lain dari *The Official Guide to the TOEFL Test* yang memuat informasi tersebut, saya dapat membantu menafsirkannya!",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.029,
+      "generation_latency_seconds": 14.482,
+      "end_to_end_latency_seconds": 14.772,
+      "latency_seconds": 14.482,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "cite_02",
+      "category": "retrieval_citation",
+      "question": "Berapa poin maksimal yang bisa diperoleh dari pertanyaan Prose Summary dan Fill-in-a-Table pada Reading section?",
+      "retrieved_pages": [
+        23,
+        52,
+        23,
+        21,
+        204
+      ],
+      "retrieved_chunks": [
+        "ebookto_00103",
+        "ebookto_00234",
+        "ebookto_00104",
+        "ebookto_00095",
+        "ebookto_01225"
+      ],
+      "retrieved_distances": [
+        0.8704376220703125,
+        0.882090151309967,
+        0.8968381285667419,
+        0.8983051776885986,
+        0.902854323387146
+      ],
+      "answer": "**Jawaban**\n\n- **Pertanyaan Prose Summary**: maksimal **2 poin** per soal.  \n- **Pertanyaan Fill‑in‑a‑Table (chart)**: maksimal **3 poin** per soal.  \n\n**Alasan**  \nPada bagian yang menjelaskan “Reading to Learn” questions, disebutkan bahwa:\n\n- “The summary questions are worth up to **2 points each**.”  \n- “The chart questions are worth up to **3 points**.”  \n\nKedua pernyataan ini muncul di dua tempat dalam dokumen:\n\n- **Halaman 52**: menyebutkan tipe‑tipe “Reading to Learn” termasuk Prose Summary dan Fill‑in‑a‑Table, serta nilai poin masing‑masing. [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 52 ]  \n- **Halaman 23**: menegaskan kembali bahwa pertanyaan ringkasan (summary) bernilai hingga 2 poin, sedangkan pertanyaan diagram/kategori (chart) bernilai hingga 3 poin. [ eBook_TOEFL_Official_Guide_4e.pdf, Halaman 23 ]\n\n📚 **Sumber**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 52  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 23",
+      "cited_pages": [
+        52,
+        23
+      ],
+      "citations": [
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 52,
+          "in_retrieved_context": true
+        },
+        {
+          "source": "eBook_TOEFL_Official_Guide_4e.pdf",
+          "page": 23,
+          "in_retrieved_context": true
+        }
+      ],
+      "retrieval_latency_seconds": 0.03,
+      "generation_latency_seconds": 15.668,
+      "end_to_end_latency_seconds": 15.981,
+      "latency_seconds": 15.668,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.4,
+      "citation_accuracy": 0.5,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "cite_03",
+      "category": "retrieval_citation",
+      "question": "Apa saja empat kategori utama topik materi kuliah (lectures) yang biasanya muncul pada Listening section?",
+      "retrieved_pages": [
+        137,
+        654,
+        655,
+        138,
+        140
+      ],
+      "retrieved_chunks": [
+        "ebookto_00829",
+        "ebookto_03842",
+        "ebookto_03850",
+        "ebookto_00831",
+        "ebookto_00842"
+      ],
+      "retrieved_distances": [
+        0.8028852939605713,
+        0.8164873719215393,
+        0.8336687684059143,
+        0.8384144902229309,
+        0.8503661155700684
+      ],
+      "answer": "**Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia.**",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.027,
+      "generation_latency_seconds": 5.603,
+      "end_to_end_latency_seconds": 5.904,
+      "latency_seconds": 5.603,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 1.0,
+      "precision_at_k": 0.2,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "cite_04",
+      "category": "retrieval_citation",
+      "question": "Apakah buku Official Guide ini diterbitkan oleh ETS dan apa edisi dari buku tersebut?",
+      "retrieved_pages": [
+        657,
+        155,
+        612,
+        665,
+        10
+      ],
+      "retrieved_chunks": [
+        "ebookto_03860",
+        "ebookto_00940",
+        "ebookto_03597",
+        "ebookto_03896",
+        "ebookto_00044"
+      ],
+      "retrieved_distances": [
+        1.0822348594665527,
+        1.1096322536468506,
+        1.1339033842086792,
+        1.165825366973877,
+        1.1658529043197632
+      ],
+      "answer": "**Jawaban**\n\nBerdasarkan cuplikan yang Anda berikan dari dokumen **eBook_TOEFL_Official_Guide_4e.pdf**, tidak terdapat pernyataan eksplisit yang menyebutkan:\n\n1. **Penerbit** buku Official Guide (misalnya “diterbitkan oleh Educational Testing Service – ETS”), maupun  \n2. **Edisi** buku (misalnya “edisi ke‑4”).\n\nCuplikan tersebut hanya memuat bagian‑bagian tentang strategi mendengarkan, mencatat, dan penulisan, serta nomor halaman, tanpa menyertakan informasi bibliografis lengkap tentang penerbit atau edisi.\n\n---\n\n### 📚 Sumber\n- **eBook_TOEFL_Official_Guide_4e.pdf**, Halaman 657, 155, 612, 665, 10 (cuplikan yang diberikan).  \n\n*Tidak ada informasi mengenai penerbit atau edisi dalam teks yang tersedia.*",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.031,
+      "generation_latency_seconds": 5.915,
+      "end_to_end_latency_seconds": 6.193,
+      "latency_seconds": 5.915,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "cite_05",
+      "category": "retrieval_citation",
+      "question": "Berapa jumlah kata minimal yang direkomendasikan untuk esai tugas Independent Writing?",
+      "retrieved_pages": [
+        223,
+        204,
+        11,
+        224,
+        214
+      ],
+      "retrieved_chunks": [
+        "ebookto_01351",
+        "ebookto_01225",
+        "ebookto_00046",
+        "ebookto_01356",
+        "ebookto_01292"
+      ],
+      "retrieved_distances": [
+        0.8468465805053711,
+        0.856281042098999,
+        0.9208055734634399,
+        0.9381998181343079,
+        0.9473298192024231
+      ],
+      "answer": "Informasi mengenai jumlah kata minimal yang direkomendasikan untuk esai pada tugas **Independent Writing** tidak terdapat dalam cuplikan dokumen yang Anda berikan.  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 223, 204, 11, 224, 214 (tidak mencakup informasi tentang rekomendasi jumlah kata).  \n\nJika Anda memiliki bagian lain dari *The Official Guide to the TOEFL Test* yang membahas pedoman panjang esai, silakan bagikan, dan saya akan membantu menjawabnya.",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.024,
+      "generation_latency_seconds": 7.406,
+      "end_to_end_latency_seconds": 7.69,
+      "latency_seconds": 7.406,
+      "error": null,
+      "status": "SUCCESS",
+      "recall_at_k": 0.0,
+      "precision_at_k": 0.0,
+      "citation_accuracy": 0.0,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "oos_01",
+      "category": "out_of_scope",
+      "question": "Berapa biaya pendaftaran resmi tes TOEFL iBT dalam mata uang Rupiah pada tahun 2025 di Jakarta?",
+      "retrieved_pages": [
+        49,
+        48,
+        1,
+        16,
+        506
+      ],
+      "retrieved_chunks": [
+        "ebookto_00219",
+        "ebookto_00216",
+        "pretest_03911",
+        "ebookto_00069",
+        "ebookto_02978"
+      ],
+      "retrieved_distances": [
+        1.1186548471450806,
+        1.2276724576950073,
+        1.2302151918411255,
+        1.285037875175476,
+        1.2885208129882812
+      ],
+      "answer": "Informasi mengenai biaya pendaftaran resmi tes TOEFL iBT dalam mata uang Rupiah untuk tahun 2025 di Jakarta **tidak ditemukan** dalam dokumen sumber yang tersedia.  \n\n📚 **Sumber:** – (tidak ada data biaya spesifik dalam konteks yang diberikan)  ",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.024,
+      "generation_latency_seconds": 6.289,
+      "end_to_end_latency_seconds": 6.572,
+      "latency_seconds": 6.289,
+      "error": null,
+      "status": "SUCCESS",
+      "oos_handled_correctly": true,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "oos_02",
+      "category": "out_of_scope",
+      "question": "Apakah buku ini memberikan informasi tentang tips mengerjakan tes IELTS Academic dan rekomendasi lembaga kursus di Yogyakarta?",
+      "retrieved_pages": [
+        17,
+        155,
+        39,
+        184,
+        209
+      ],
+      "retrieved_chunks": [
+        "ebookto_00077",
+        "ebookto_00940",
+        "ebookto_00164",
+        "ebookto_01103",
+        "ebookto_01261"
+      ],
+      "retrieved_distances": [
+        1.079829454421997,
+        1.1153517961502075,
+        1.1186023950576782,
+        1.1269505023956299,
+        1.1318333148956299
+      ],
+      "answer": "Tidak. Berdasarkan cuplikan yang tersedia dari **eBook_TOEFL_Official_Guide_4e.pdf** (halaman 17, 39, 155, 184, 209), buku ini hanya memberikan tips belajar dan strategi untuk masing‑masing bagian TOEFL iBT (Reading, Listening, Speaking, Writing). Tidak ada satupun bagian yang membahas:\n\n* tips mengerjakan tes **IELTS Academic**, maupun  \n* rekomendasi lembaga kursus atau pusat belajar di **Yogyakarta**.\n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf, Halaman 17, 39, 155, 184, 209 (tidak ada referensi ke IELTS atau Yogyakarta).",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.028,
+      "generation_latency_seconds": 11.643,
+      "end_to_end_latency_seconds": 11.938,
+      "latency_seconds": 11.643,
+      "error": null,
+      "status": "SUCCESS",
+      "oos_handled_correctly": false,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "oos_03",
+      "category": "out_of_scope",
+      "question": "Bagaimana arsitektur kode deep learning PyTorch dari model e-rater yang digunakan ETS untuk menilai esai?",
+      "retrieved_pages": [
+        324,
+        230,
+        221,
+        457,
+        182
+      ],
+      "retrieved_chunks": [
+        "ebookto_01900",
+        "ebookto_01398",
+        "ebookto_01338",
+        "ebookto_02671",
+        "ebookto_01087"
+      ],
+      "retrieved_distances": [
+        1.4416215419769287,
+        1.443786382675171,
+        1.4509295225143433,
+        1.4531495571136475,
+        1.4741747379302979
+      ],
+      "answer": "**Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia.**",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.026,
+      "generation_latency_seconds": 14.194,
+      "end_to_end_latency_seconds": 14.49,
+      "latency_seconds": 14.194,
+      "error": null,
+      "status": "SUCCESS",
+      "oos_handled_correctly": true,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "oos_04",
+      "category": "out_of_scope",
+      "question": "Apa syarat skor tes PTE Academic untuk mengajukan visa kerja ke Australia?",
+      "retrieved_pages": [
+        214,
+        36,
+        11,
+        299,
+        36
+      ],
+      "retrieved_chunks": [
+        "ebookto_01292",
+        "ebookto_00155",
+        "ebookto_00046",
+        "ebookto_01743",
+        "ebookto_00157"
+      ],
+      "retrieved_distances": [
+        0.956650972366333,
+        0.965843915939331,
+        0.9884752035140991,
+        0.9924191236495972,
+        1.0016224384307861
+      ],
+      "answer": "Informasi mengenai **syarat skor PTE Academic untuk mengajukan visa kerja ke Australia** tidak terdapat dalam dokumen sumber yang tersedia (The Official Guide to the TOEFL Test 4th Ed.).  \n\n📚 **Sumber:**  \n- eBook_TOEFL_Official_Guide_4e.pdf (halaman 11, 36, 214, 299, dan halaman lainnya) hanya membahas tentang format, penilaian, dan skor TOEFL, tidak mencakup persyaratan PTE Academic atau kebijakan imigrasi Australia.  \n\nJika Anda memerlukan detail tentang persyaratan visa kerja Australia, disarankan untuk merujuk langsung ke situs resmi Departemen Dalam Negeri Australia (Department of Home Affairs) atau sumber resmi terkait PTE Academic.",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.027,
+      "generation_latency_seconds": 5.507,
+      "end_to_end_latency_seconds": 5.797,
+      "latency_seconds": 5.507,
+      "error": null,
+      "status": "SUCCESS",
+      "oos_handled_correctly": true,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    },
+    {
+      "id": "oos_05",
+      "category": "out_of_scope",
+      "question": "Berapa kunci jawaban untuk soal nomor 1 sampai 10 pada ujian SBMPTN/UTBK tahun ini?",
+      "retrieved_pages": [
+        525,
+        9,
+        642,
+        43,
+        10
+      ],
+      "retrieved_chunks": [
+        "ebookto_03030",
+        "ebookto_00031",
+        "ebookto_03775",
+        "ebookto_00192",
+        "ebookto_00044"
+      ],
+      "retrieved_distances": [
+        1.225252628326416,
+        1.2595576047897339,
+        1.2651056051254272,
+        1.2720527648925781,
+        1.273616075515747
+      ],
+      "answer": "Hai! Terima kasih sudah menghubungi saya. Sayangnya, dokumen yang Anda berikan (The Official Guide to the TOEFL Test 4th Ed.) hanya berisi informasi tentang tes TOEFL, bukan tentang kunci jawaban soal SBMPTN/UTBK.  \n\n**Informasi ini tidak ditemukan dalam dokumen sumber yang tersedia.**  \n\nJika Anda membutuhkan bantuan lain—misalnya penjelasan tentang format TOEFL, strategi menjawab soal, atau latihan soal TOEFL—saya siap membantu! 🌟",
+      "cited_pages": [],
+      "citations": [],
+      "retrieval_latency_seconds": 0.025,
+      "generation_latency_seconds": 5.307,
+      "end_to_end_latency_seconds": 5.604,
+      "latency_seconds": 5.307,
+      "error": null,
+      "status": "SUCCESS",
+      "oos_handled_correctly": true,
+      "answer_correctness": "NOT_RATED",
+      "groundedness": "NOT_RATED",
+      "human_notes": ""
+    }
+  ],
+  "run_status": "PARTIAL_OR_NOT_RUN",
+  "publication_note": "Salinan publik tersanitasi; bukan run baru. Pesan error provider dihapus, metrik historis tidak dihitung ulang."
+}
